@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- ============================================================
+     ICRTACM-2026 — 7th International Conference on Recent Trends
+     in Applied and Computational Mathematics
+     School of Applied Sciences, REVA University, Bangalore
+     October 30-31, 2026
+
+     REVA BRAND SYSTEM (from assets/corporate/css/themes/orange.css):
+       Primary orange  : #e18604
+       Hover orange    : #E79E36
+       Navbar bg       : #d4851a
+       Heading text    : #1e2d4e  (dark navy)
+       Body text       : #3e4d5c  (from style.css)
+       Page bg         : #fdf6ed  (warm cream)
+       Section alt bg  : #f9ede4  (light peach)
+       Footer bg       : #1c1c1c  (near-black)
+       Font headings   : Roboto Slab
+       Font body/UI    : Roboto
+
+     ASSET PATHS (all relative, mapped from extracted ZIP):
+       ./assets/img/logos/REVA_Logo_2.png    -> main logo
+       ./assets/img/logos/REVA_icon.png      -> favicon
+       ./assets/img/logos/maths_dept.png     -> dept emblem
+       ./assets/img/banner_maths.png         -> hero banner
+       ./assets/img/banner_hero.jpg          -> fallback banner
+       ./assets/img/campus_main.jpg          -> about section
+       ./assets/img/campus_alt.jpg           -> contact section
+       ./assets/img/speakers/S1-S8.png       -> speaker photos
+       ./assets/img/payment_qr.png           -> REVA payment QR
+       ./assets/docs/brochure.pdf            -> brochure (add when ready)
+
+     SECTIONS (flat siblings — no nested routing):
+       #home | #about | #speakers | #agenda | #committees
+       #registration | #call-for-abstract | #accommodation
+       #sponsor-benefits | #contact
+     ============================================================ -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ICRTACM-2026 — 7th International Conference on Recent Trends in Applied and Computational Mathematics (ICRTACAM 2026), School of Applied Sciences, REVA University, Bangalore, October 30-31, 2026." />
+  <link rel="icon" type="image/png" href="./assets/img/logos/REVA_icon.png" />
+  <title>ICRTACM-2026 | 7th International Conference on Recent Trends in Applied and Computational Mathematics | REVA University, Bangalore</title>
+
+  <!-- ============================================================
+       GOOGLE FONTS — REVA official font stack
+       Roboto Slab  -> headings  (matches orange.css / style.css)
+       Roboto       -> body, tables, UI elements
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 — icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — OFFICIAL REVA UNIVERSITY BRAND SYSTEM
+       Source: assets/corporate/css/themes/orange.css + screenshots
+       DO NOT change these values without REVA brand approval.
+       ============================================================ */
+    :root {
+      /* -- REVA Primary Palette (from orange.css) -- */
+      --reva-orange:       #e18604;  /* Primary brand orange - all links, icons, accents    */
+      --reva-orange-hover: #E79E36;  /* Hover / lighter orange state                       */
+      --reva-orange-dark:  #b86c00;  /* Deep orange - navbar bg, pressed states            */
+      --reva-orange-nav:   #d4851a;  /* Navbar background (from screenshots)               */
+      --reva-orange-pale:  #fdf0d8;  /* Very pale orange tint - card backgrounds           */
+
+      /* -- REVA Text (from style.css) -- */
+      --reva-navy:         #1e2d4e;  /* Heading text - dark navy (from screenshots)        */
+      --reva-text:         #3e4d5c;  /* Body text (literal value from style.css)           */
+      --reva-muted:        #767f88;  /* Muted / secondary / captions                      */
+
+      /* -- REVA Backgrounds (from screenshots) -- */
+      --reva-cream:        #fdf6ed;  /* Main page background - warm cream                 */
+      --reva-peach:        #f9ede4;  /* Alt section background - light peach              */
+      --reva-peach-mid:    #f0dece;  /* Mid peach - table row alternate                   */
+      --reva-white:        #ffffff;  /* Cards, table cells                                */
+      --reva-footer:       #1c1c1c;  /* Footer background - near-black charcoal           */
+
+      /* -- Utility -- */
+      --reva-border:       #e2ccb0;  /* Card/table borders - warm-toned                   */
+      --reva-border-lt:    #eddfc8;  /* Light dividers inside sections                    */
+      --reva-shadow:       rgba(225,134,4,0.14); /* Brand-tinted box shadow              */
+
+      /* -- Typography (from style.css font-family declarations) -- */
+      --font-heading: 'Roboto Slab', Georgia, serif;
+      --font-body:    'Roboto', Arial, sans-serif;
+
+      /* -- Layout -- */
+      --container:   1140px;
+      --pad-section: 80px;
+      --radius:      6px;
+      --radius-lg:   12px;
+      --tr:          0.22s ease;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html  { scroll-behavior: smooth; font-size: 16px; }
+    body  { font-family: var(--font-body); color: var(--reva-text); background: var(--reva-cream); line-height: 1.75; overflow-x: hidden; }
+    img   { max-width: 100%; display: block; }
+    a     { color: var(--reva-orange); text-decoration: none; transition: color var(--tr); }
+    a:hover { color: var(--reva-orange-hover); }
+    ul    { list-style: none; }
+
+    /* ============================================================
+       LAYOUT UTILITIES
+       ============================================================ */
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    /* Sections hidden by default; JS adds .active to show */
+    .section        { display: none; padding: var(--pad-section) 0; min-height: calc(100vh - 120px); animation: fadeIn 0.28s ease; }
+    .section.active { display: block; }
+    .section--alt   { background: var(--reva-peach); }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+    /* Section heading block - shared across all sections */
+    .sec-hd         { text-align:center; margin-bottom:52px; }
+    .sec-hd__label  { display:inline-block; font-family:var(--font-body); font-size:.72rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--reva-orange); margin-bottom:10px; }
+    .sec-hd__title  { font-family:var(--font-heading); font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; color:var(--reva-navy); line-height:1.22; margin-bottom:14px; }
+    .sec-hd__rule   { width:52px; height:3px; background:var(--reva-orange); margin:0 auto 18px; border-radius:2px; }
+    .sec-hd__sub    { font-size:.97rem; color:var(--reva-muted); max-width:620px; margin:0 auto; font-family:var(--font-body); }
+
+    /* Buttons */
+    .btn            { display:inline-flex; align-items:center; gap:8px; padding:11px 26px; border-radius:var(--radius); font-family:var(--font-body); font-size:.9rem; font-weight:600; cursor:pointer; border:2px solid transparent; transition:all var(--tr); text-decoration:none; }
+    .btn--primary   { background:var(--reva-orange); color:#fff; border-color:var(--reva-orange); }
+    .btn--primary:hover { background:var(--reva-orange-hover); border-color:var(--reva-orange-hover); color:#fff; transform:translateY(-2px); box-shadow:0 4px 14px var(--reva-shadow); }
+    .btn--outline   { background:transparent; color:#fff; border-color:rgba(255,255,255,.65); }
+    .btn--outline:hover { background:rgba(255,255,255,.14); border-color:#fff; color:#fff; transform:translateY(-2px); }
+    .btn--ghost     { background:transparent; color:var(--reva-orange); border-color:var(--reva-orange); }
+    .btn--ghost:hover { background:var(--reva-orange); color:#fff; }
+    .btn--dark      { background:var(--reva-navy); color:#fff; border-color:var(--reva-navy); }
+    .btn--dark:hover { background:#152340; color:#fff; transform:translateY(-2px); }
+
+    /* Table card */
+    .tbl-card            { background:var(--reva-white); border-radius:var(--radius-lg); box-shadow:0 2px 10px var(--reva-shadow); border:1px solid var(--reva-border); overflow:hidden; }
+    .tbl-card__hd        { padding:15px 20px; background:var(--reva-peach); border-bottom:3px solid var(--reva-orange); display:flex; align-items:center; gap:10px; }
+    .tbl-card__hd i      { color:var(--reva-orange); }
+    .tbl-card__title     { font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:var(--reva-navy); }
+    .data-tbl            { width:100%; border-collapse:collapse; font-family:var(--font-body); font-size:.88rem; }
+    .data-tbl thead th   { background:var(--reva-orange); color:#fff; padding:11px 16px; text-align:left; font-weight:600; font-size:.78rem; letter-spacing:.04em; text-transform:uppercase; }
+    .data-tbl tbody tr:nth-child(odd)  { background:var(--reva-white); }
+    .data-tbl tbody tr:nth-child(even) { background:var(--reva-peach-mid); }
+    .data-tbl tbody tr:hover           { background:#fce9c8; }
+    .data-tbl tbody td   { padding:10px 16px; border-bottom:1px solid var(--reva-border-lt); color:var(--reva-text); vertical-align:middle; }
+    .data-tbl tbody td:first-child     { font-weight:600; color:var(--reva-navy); }
+    .data-tbl tr.hl td   { background:rgba(225,134,4,.1) !important; font-weight:600; }
+
+    /* Badges */
+    .badge        { display:inline-block; padding:3px 10px; border-radius:100px; font-size:.7rem; font-weight:700; font-family:var(--font-body); }
+    .badge--soon  { background:#fff3cd; color:#7a5800; }
+    .badge--tbd   { background:#ede9e3; color:#5a4e40; }
+    .badge--conf  { background:var(--reva-orange-pale); color:var(--reva-orange-dark); border:1px solid rgba(225,134,4,.3); }
+
+    /* Note / info box */
+    .note-box   { display:flex; gap:12px; background:var(--reva-orange-pale); border:1px solid rgba(225,134,4,.3); border-radius:var(--radius); padding:14px 18px; font-family:var(--font-body); font-size:.85rem; }
+    .note-box i { color:var(--reva-orange); flex-shrink:0; margin-top:2px; }
+
+    /* Sidebar info card */
+    .icard         { background:var(--reva-white); border:1px solid var(--reva-border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 2px 10px var(--reva-shadow); }
+    .icard__hd     { background:var(--reva-orange); padding:13px 18px; display:flex; align-items:center; gap:10px; }
+    .icard__hd i   { color:#fff; }
+    .icard__hd h4  { font-family:var(--font-heading); font-size:.96rem; font-weight:700; color:#fff; margin:0; }
+    .icard__body   { padding:16px 18px; }
+    .icard__row    { display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px solid var(--reva-border-lt); font-family:var(--font-body); font-size:.84rem; }
+    .icard__row:last-child { border-bottom:none; }
+    .icard__row i  { color:var(--reva-orange); font-size:.88rem; margin-top:2px; width:15px; flex-shrink:0; }
+    .icard__row-label { font-weight:700; color:var(--reva-muted); display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; margin-bottom:2px; }
+    .icard__row-val   { color:var(--reva-text); }
+
+    /* ============================================================
+       TICKER — announcement bar
+       ============================================================ */
+    .ticker          { background:var(--reva-orange-dark); padding:8px 0; overflow:hidden; position:relative; z-index:1001; }
+    .ticker__inner   { display:flex; align-items:center; gap:16px; }
+    .ticker__label   { font-family:var(--font-body); font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#fff; white-space:nowrap; padding-right:14px; border-right:1px solid rgba(255,255,255,.3); flex-shrink:0; }
+    .ticker__scroll  { overflow:hidden; flex:1; }
+    .ticker__text    { display:inline-block; white-space:nowrap; font-family:var(--font-body); font-size:.78rem; color:rgba(255,255,255,.92); animation:ticker 42s linear infinite; }
+    @keyframes ticker { 0%{transform:translateX(100%)} 100%{transform:translateX(-100%)} }
+    .ticker__contact { display:flex; align-items:center; gap:18px; white-space:nowrap; flex-shrink:0; }
+    .ticker__contact a { color:rgba(255,255,255,.85); font-family:var(--font-body); font-size:.76rem; display:flex; align-items:center; gap:6px; }
+    .ticker__contact a:hover { color:#fff; }
+
+    /* ============================================================
+       NAVBAR — REVA orange bar
+       ============================================================ */
+    /* Navbar base — solid orange; transitions to frosted glass on scroll */
+    .navbar        { position:sticky; top:0; z-index:1000; background:var(--reva-orange-nav); box-shadow:0 2px 14px rgba(180,90,0,.3); transition:background .35s ease, backdrop-filter .35s ease, box-shadow .35s ease; }
+    /* .scrolled added by JS when user scrolls past 60px */
+    .navbar.scrolled { background:rgba(212,133,26,.72); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); box-shadow:0 4px 24px rgba(180,90,0,.22); }
+    .navbar__inner { display:flex; align-items:center; justify-content:space-between; height:70px; }
+    /* Brand: horizontal logo image — full width, no circle */
+    .navbar__brand { display:flex; align-items:center; gap:0; cursor:pointer; }
+    /* No background, no shape, no overflow — just the image placed directly */
+    .navbar__logo  { display:flex; align-items:center; flex-shrink:0; background:none; border-radius:0; overflow:visible; }
+    /* Logo is already white on transparent — NO filter needed */
+    .navbar__logo img { height:52px; width:auto; object-fit:contain; display:block; background:none; filter:none; border-radius:0; }
+    .navbar__name  { display:none; }
+    .navbar__sub   { display:none; }
+    .navbar__nav   { display:flex; align-items:center; gap:2px; }
+    .nav-link      { font-family:var(--font-body); font-size:.82rem; font-weight:500; color:rgba(255,255,255,.9); padding:6px 11px; border-radius:var(--radius); cursor:pointer; transition:all var(--tr); white-space:nowrap; position:relative; }
+    .nav-link:hover, .nav-link.active { color:#fff; background:rgba(0,0,0,.18); }
+    .nav-link.active::after { content:''; position:absolute; bottom:-2px; left:50%; transform:translateX(-50%); width:18px; height:2px; background:#fff; border-radius:2px; }
+    .nav-dd        { position:relative; }
+    .nav-dd__menu  { display:none; position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%); background:var(--reva-white); border-radius:var(--radius); box-shadow:0 8px 32px rgba(0,0,0,.18); border:1px solid var(--reva-border); min-width:192px; overflow:hidden; z-index:200; }
+    .nav-dd:hover .nav-dd__menu, .nav-dd.open .nav-dd__menu { display:block; }
+    .nav-dd__item  { display:block; padding:10px 18px; font-family:var(--font-body); font-size:.84rem; color:var(--reva-text); cursor:pointer; transition:background var(--tr); border-bottom:1px solid var(--reva-border-lt); }
+    .nav-dd__item:last-child { border-bottom:none; }
+    .nav-dd__item:hover { background:var(--reva-peach); color:var(--reva-orange); }
+    .nav-reg       { background:#fff !important; color:var(--reva-orange-dark) !important; font-weight:700 !important; border-radius:4px !important; padding:7px 14px !important; }
+    .nav-reg:hover { background:var(--reva-orange-pale) !important; }
+    .nav-burger    { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; background:none; border:none; }
+    .nav-burger span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; transition:all .3s; }
+    .nav-burger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .nav-burger.open span:nth-child(2) { opacity:0; }
+    .nav-burger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .nav-mobile          { display:none; background:var(--reva-orange-dark); padding:10px 0; border-top:1px solid rgba(255,255,255,.14); }
+    .nav-mobile.open     { display:block; }
+    .mobile-link         { display:block; padding:11px 24px; font-family:var(--font-body); font-size:.88rem; color:rgba(255,255,255,.88); cursor:pointer; transition:background var(--tr); border-bottom:1px solid rgba(255,255,255,.07); }
+    .mobile-link:hover, .mobile-link.active { background:rgba(0,0,0,.18); color:#fff; }
+
+    /* ============================================================
+       HOME — Hero: full-width banner centered on top, text below
+       ============================================================ */
+    .hero          { position:relative; background:var(--reva-peach); overflow:hidden; }
+    .hero::before  { content:''; position:absolute; inset:0; background:radial-gradient(circle at 78% 50%,rgba(225,134,4,.07) 0%,transparent 52%),radial-gradient(circle at 8% 80%,rgba(225,134,4,.05) 0%,transparent 42%); pointer-events:none; }
+    .hero__ring1   { position:absolute; top:-50px; right:-50px; width:280px; height:280px; border:44px solid rgba(225,134,4,.08); border-radius:50%; pointer-events:none; }
+    .hero__ring2   { position:absolute; bottom:-28px; left:-28px; width:170px; height:170px; border:30px solid rgba(225,134,4,.06); border-radius:50%; pointer-events:none; }
+
+    /* Banner image — full container width, no cropping */
+    .hero__banner-wrap { position:relative; z-index:1; width:100%; background:var(--reva-peach); padding:28px 0 0; }
+    .hero__banner-wrap img { display:block; width:100%; max-height:420px; object-fit:contain; object-position:center; margin:0 auto; }
+
+    /* Text content block below the banner */
+    .hero__text    { position:relative; z-index:1; padding:36px 0 52px; }
+    .hero__overline { display:inline-flex; align-items:center; gap:8px; font-family:var(--font-body); font-size:.72rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--reva-orange); margin-bottom:14px; }
+    .hero__title   { font-family:var(--font-heading); font-size:clamp(1.7rem,3.4vw,2.75rem); font-weight:800; color:var(--reva-navy); line-height:1.18; margin-bottom:10px; }
+    .hero__title span { color:var(--reva-orange); }
+    .hero__sub     { font-family:var(--font-body); font-size:.97rem; color:var(--reva-muted); margin-bottom:26px; line-height:1.7; max-width:680px; }
+    .hero__meta    { display:flex; flex-wrap:wrap; gap:14px; margin-bottom:28px; }
+    .hero__pill    { display:flex; align-items:center; gap:8px; font-family:var(--font-body); font-size:.86rem; color:var(--reva-text); background:rgba(225,134,4,.09); border:1px solid rgba(225,134,4,.22); padding:6px 14px; border-radius:100px; }
+    .hero__pill i  { color:var(--reva-orange); font-size:.86rem; }
+    .hero__cta     { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:36px; }
+    .ct-lbl-row    { font-family:var(--font-body); font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--reva-muted); margin-bottom:10px; }
+    .countdown     { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .ct-unit       { background:var(--reva-white); border:2px solid var(--reva-border); border-radius:var(--radius); padding:12px 16px; text-align:center; min-width:72px; box-shadow:0 2px 8px var(--reva-shadow); }
+    .ct-num        { display:block; font-family:var(--font-heading); font-size:1.85rem; font-weight:700; color:var(--reva-orange); line-height:1; }
+    .ct-unit-lbl   { display:block; font-family:var(--font-body); font-size:.62rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--reva-muted); margin-top:4px; }
+    .ct-sep        { color:var(--reva-orange); font-size:1.4rem; font-weight:700; opacity:.45; }
+    .home-grid     { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:52px; }
+
+    /* ============================================================
+       ABOUT
+       ============================================================ */
+    .about-grid    { display:grid; grid-template-columns:3fr 2fr; gap:48px; align-items:start; }
+    .about-body p  { margin-bottom:16px; font-size:.96rem; line-height:1.82; }
+    .about-h3      { font-family:var(--font-heading); font-size:1.18rem; color:var(--reva-navy); margin:28px 0 12px; padding-left:13px; border-left:3px solid var(--reva-orange); }
+    .topics-grid   { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+    .topic-pill    { display:flex; align-items:flex-start; gap:8px; font-family:var(--font-body); font-size:.83rem; color:var(--reva-text); padding:8px 12px; background:var(--reva-white); border-radius:var(--radius); border-left:3px solid var(--reva-orange); line-height:1.4; }
+    .topic-pill i  { color:var(--reva-orange); font-size:.7rem; margin-top:3px; flex-shrink:0; }
+    .about-sidebar { display:flex; flex-direction:column; gap:18px; }
+    .campus-img    { border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 4px 20px var(--reva-shadow); }
+    .campus-img img { width:100%; height:200px; object-fit:cover; }
+    .dept-card     { background:var(--reva-white); border:1px solid var(--reva-border); border-radius:var(--radius-lg); padding:20px; text-align:center; box-shadow:0 2px 10px var(--reva-shadow); }
+    .dept-card img { height:80px; width:auto; object-fit:contain; margin:0 auto 10px; }
+
+    /* ============================================================
+       SPEAKERS
+       ============================================================ */
+    .spk-grid      { display:grid; grid-template-columns:repeat(auto-fill,minmax(228px,1fr)); gap:22px; }
+    .spk-card      { background:var(--reva-white); border-radius:var(--radius-lg); box-shadow:0 2px 10px var(--reva-shadow); border:1px solid var(--reva-border); overflow:hidden; transition:box-shadow var(--tr),transform var(--tr); text-align:center; }
+    .spk-card:hover { box-shadow:0 6px 24px var(--reva-shadow); transform:translateY(-4px); }
+    .spk-photo     { width:100%; aspect-ratio:1/1; background:linear-gradient(140deg,var(--reva-peach-mid),var(--reva-peach)); overflow:hidden; }
+    .spk-photo img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+    .spk-avatar    { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+    .spk-avatar i  { font-size:4rem; color:rgba(225,134,4,.28); }
+    .spk-body      { padding:16px 14px; }
+    .spk-name      { font-family:var(--font-heading); font-size:1rem; font-weight:700; color:var(--reva-navy); margin-bottom:4px; }
+    .spk-affil     { font-family:var(--font-body); font-size:.75rem; color:var(--reva-muted); margin-bottom:10px; line-height:1.45; }
+    .spk-topic     { font-family:var(--font-body); font-size:.78rem; color:var(--reva-text); background:var(--reva-peach); padding:7px 10px; border-radius:var(--radius); border-left:3px solid var(--reva-orange); text-align:left; line-height:1.4; }
+
+    /* ============================================================
+       AGENDA
+       ============================================================ */
+    .ag-tabs       { display:flex; gap:6px; margin-bottom:24px; border-bottom:2px solid var(--reva-border); }
+    .ag-tab        { padding:10px 24px; font-family:var(--font-body); font-size:.86rem; font-weight:600; color:var(--reva-muted); cursor:pointer; border-radius:var(--radius) var(--radius) 0 0; border:1px solid transparent; border-bottom:none; transition:all var(--tr); margin-bottom:-2px; }
+    .ag-tab:hover, .ag-tab.active { color:var(--reva-navy); border-color:var(--reva-border); background:var(--reva-white); }
+    .ag-tab.active { border-bottom:2px solid var(--reva-white); }
+    .ag-day        { display:none; }
+    .ag-day.active { display:block; }
+    .ag-item       { display:grid; grid-template-columns:130px 1fr; border-bottom:1px solid var(--reva-border-lt); }
+    .ag-item:last-child { border-bottom:none; }
+    .ag-time       { padding:15px 14px 15px 0; font-family:var(--font-body); font-size:.78rem; font-weight:700; color:var(--reva-orange); border-right:3px solid var(--reva-orange); margin-right:20px; white-space:nowrap; }
+    .ag-body       { padding:15px 0; }
+    .ag-title      { font-family:var(--font-heading); font-size:.96rem; font-weight:600; color:var(--reva-navy); margin-bottom:3px; }
+    .ag-detail     { font-family:var(--font-body); font-size:.78rem; color:var(--reva-muted); line-height:1.5; }
+    .ag-item--brk .ag-time  { color:var(--reva-muted); border-color:var(--reva-border); }
+    .ag-item--brk .ag-title { font-style:italic; color:var(--reva-muted); }
+    .theme-bar     { margin-top:36px; }
+    .theme-bar h3  { font-family:var(--font-heading); font-size:1.2rem; color:var(--reva-navy); margin-bottom:14px; padding-left:13px; border-left:3px solid var(--reva-orange); }
+    .theme-pills   { display:flex; flex-wrap:wrap; gap:9px; }
+    .t-pill        { background:var(--reva-white); border:1px solid var(--reva-border); color:var(--reva-navy); font-family:var(--font-body); font-size:.82rem; padding:6px 16px; border-radius:100px; transition:all var(--tr); cursor:default; }
+    .t-pill:hover  { background:var(--reva-orange); color:#fff; border-color:var(--reva-orange); }
+
+    /* ============================================================
+       COMMITTEES
+       ============================================================ */
+    .patron-grid   { display:grid; grid-template-columns:repeat(auto-fill,minmax(255px,1fr)); gap:14px; margin-bottom:32px; }
+    .patron-card   { background:var(--reva-orange); border-radius:var(--radius-lg); padding:20px 22px; }
+    .patron-lbl    { font-family:var(--font-body); font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.72); margin-bottom:7px; }
+    .patron-name   { font-family:var(--font-heading); font-size:1rem; font-weight:700; color:#fff; margin-bottom:4px; }
+    .patron-role   { font-family:var(--font-body); font-size:.78rem; color:rgba(255,255,255,.76); }
+    .comm-tabs     { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:26px; }
+    .comm-tab      { padding:8px 20px; font-family:var(--font-body); font-size:.83rem; font-weight:600; color:var(--reva-muted); cursor:pointer; border-radius:100px; border:2px solid var(--reva-border); transition:all var(--tr); }
+    .comm-tab:hover { border-color:var(--reva-orange); color:var(--reva-orange); }
+    .comm-tab.active { background:var(--reva-orange); color:#fff; border-color:var(--reva-orange); }
+    .comm-panel    { display:none; }
+    .comm-panel.active { display:block; }
+    .member-grid   { display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:13px; }
+    .member-card   { display:flex; align-items:flex-start; gap:13px; padding:13px 15px; background:var(--reva-white); border:1px solid var(--reva-border); border-radius:var(--radius); box-shadow:0 1px 6px var(--reva-shadow); transition:box-shadow var(--tr); }
+    .member-card:hover { box-shadow:0 4px 18px var(--reva-shadow); }
+    .member-av     { width:42px; height:42px; border-radius:50%; background:var(--reva-orange); display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-weight:700; font-size:.9rem; color:#fff; flex-shrink:0; }
+    .member-name   { font-family:var(--font-body); font-size:.86rem; font-weight:700; color:var(--reva-navy); margin-bottom:2px; }
+    .member-role   { font-family:var(--font-body); font-size:.74rem; color:var(--reva-muted); line-height:1.45; }
+    .member-role a { color:var(--reva-orange); font-size:.74rem; }
+
+    /* ============================================================
+       REGISTRATION
+       ============================================================ */
+    .reg-layout    { display:grid; grid-template-columns:1fr 360px; gap:36px; align-items:start; }
+    .reg-cta       { background:var(--reva-orange); border-radius:var(--radius-lg); padding:28px 24px; color:#fff; position:sticky; top:86px; }
+    .reg-cta h3    { font-family:var(--font-heading); font-size:1.25rem; color:#fff; margin-bottom:10px; }
+    .reg-cta p     { font-family:var(--font-body); font-size:.84rem; color:rgba(255,255,255,.8); margin-bottom:20px; line-height:1.65; }
+    .reg-cta .btn  { width:100%; justify-content:center; margin-bottom:10px; }
+    .reg-cta-row   { display:flex; align-items:center; gap:9px; font-family:var(--font-body); font-size:.8rem; color:rgba(255,255,255,.75); padding:7px 0; border-top:1px solid rgba(255,255,255,.15); }
+    .reg-cta-row i { width:16px; color:rgba(255,255,255,.9); }
+    .reg-cta-row a { color:inherit; }
+    .reg-cta-row a:hover { color:#fff; }
+    .qr-wrap       { text-align:center; margin-top:18px; padding-top:18px; border-top:1px solid rgba(255,255,255,.2); }
+    .qr-wrap p     { font-family:var(--font-body); font-size:.74rem; color:rgba(255,255,255,.68); margin-bottom:10px; }
+    .qr-wrap img   { width:120px; height:120px; border-radius:var(--radius); object-fit:cover; margin:0 auto; border:3px solid rgba(255,255,255,.3); }
+    .reg-section-h3 { font-family:var(--font-heading); color:var(--reva-navy); font-size:1.12rem; margin-bottom:14px; padding-left:13px; border-left:3px solid var(--reva-orange); }
+
+    /* ============================================================
+       CALL FOR ABSTRACT
+       ============================================================ */
+    .cfa-layout    { display:grid; grid-template-columns:2fr 1fr; gap:40px; }
+    .cfa-step      { display:flex; gap:16px; margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--reva-border-lt); }
+    .cfa-step:last-of-type { border-bottom:none; }
+    .cfa-num       { width:36px; height:36px; border-radius:50%; background:var(--reva-orange); color:#fff; font-family:var(--font-heading); font-weight:700; font-size:.96rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .cfa-step h4   { font-family:var(--font-heading); font-size:1rem; color:var(--reva-navy); margin-bottom:6px; }
+    .cfa-step p    { font-family:var(--font-body); font-size:.85rem; color:var(--reva-muted); line-height:1.7; }
+    .cfa-card      { background:var(--reva-orange); border-radius:var(--radius-lg); padding:22px 20px; margin-bottom:16px; }
+    .cfa-card h3   { font-family:var(--font-heading); font-size:1.05rem; color:#fff; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,.18); }
+    .dl-row        { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.08); font-family:var(--font-body); font-size:.81rem; }
+    .dl-row:last-child { border-bottom:none; }
+    .dl-row__lbl   { color:rgba(255,255,255,.72); }
+    .dl-row__val   { font-weight:700; color:rgba(255,255,255,.95); }
+    .check-item    { display:flex; gap:10px; font-family:var(--font-body); font-size:.84rem; color:var(--reva-text); margin-bottom:8px; }
+    .check-item i  { color:var(--reva-orange); font-size:.76rem; margin-top:3px; flex-shrink:0; }
+
+    /* ============================================================
+       ACCOMMODATION
+       ============================================================ */
+    .accomm-grid   { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+    .accomm-card   { background:var(--reva-white); border:1px solid var(--reva-border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 2px 10px var(--reva-shadow); }
+    .accomm-hd     { background:var(--reva-orange); padding:18px 20px; }
+    .accomm-hd h3  { font-family:var(--font-heading); font-size:1.08rem; color:#fff; margin-bottom:3px; }
+    .accomm-hd p   { font-family:var(--font-body); font-size:.78rem; color:rgba(255,255,255,.7); }
+    .accomm-body   { padding:18px 20px; }
+    .accomm-row    { display:flex; gap:10px; font-family:var(--font-body); font-size:.84rem; color:var(--reva-text); margin-bottom:10px; align-items:flex-start; }
+    .accomm-row i  { color:var(--reva-orange); width:15px; margin-top:2px; flex-shrink:0; }
+    .transport     { margin-top:38px; background:var(--reva-white); border-radius:var(--radius-lg); padding:28px 32px; box-shadow:0 2px 10px var(--reva-shadow); border:1px solid var(--reva-border); }
+    .transport h3  { font-family:var(--font-heading); font-size:1.22rem; color:var(--reva-navy); margin-bottom:22px; }
+    .tr-grid       { display:grid; grid-template-columns:repeat(auto-fit,minmax(196px,1fr)); gap:20px; }
+    .tr-item       { display:flex; gap:14px; }
+    .tr-icon       { width:42px; height:42px; border-radius:var(--radius); background:var(--reva-orange); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .tr-icon i     { color:#fff; font-size:1rem; }
+    .tr-item h4    { font-family:var(--font-body); font-size:.87rem; font-weight:700; color:var(--reva-navy); margin-bottom:4px; }
+    .tr-item p     { font-family:var(--font-body); font-size:.78rem; color:var(--reva-muted); line-height:1.5; }
+
+    /* ============================================================
+       SPONSOR BENEFITS
+       ============================================================ */
+    .value-row     { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:36px; }
+    .val-card      { background:var(--reva-white); border:1px solid var(--reva-border); border-radius:var(--radius-lg); padding:24px 20px; text-align:center; box-shadow:0 2px 10px var(--reva-shadow); transition:box-shadow var(--tr),transform var(--tr); }
+    .val-card:hover { box-shadow:0 6px 24px var(--reva-shadow); transform:translateY(-3px); }
+    .val-icon      { width:56px; height:56px; border-radius:50%; background:var(--reva-orange-pale); border:2px solid rgba(225,134,4,.2); display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+    .val-icon i    { color:var(--reva-orange); font-size:1.4rem; }
+    .val-card h4   { font-family:var(--font-heading); font-size:1rem; color:var(--reva-navy); margin-bottom:6px; }
+    .val-card p    { font-family:var(--font-body); font-size:.82rem; color:var(--reva-muted); line-height:1.55; }
+    .tier-grid     { display:grid; grid-template-columns:repeat(auto-fit,minmax(228px,1fr)); gap:18px; margin-bottom:36px; }
+    .tier-card     { border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 2px 10px var(--reva-shadow); border:1px solid var(--reva-border); transition:box-shadow var(--tr),transform var(--tr); }
+    .tier-card:hover { box-shadow:0 8px 32px var(--reva-shadow); transform:translateY(-4px); }
+    .tier-hd       { padding:22px 22px 18px; text-align:center; }
+    .tier--plat .tier-hd { background:linear-gradient(135deg,#b0b0b0,#e0e0e0); }
+    .tier--gold .tier-hd { background:linear-gradient(135deg,#e18604,#E79E36); }
+    .tier--silv .tier-hd { background:linear-gradient(135deg,#8a9ab0,#b8c8d8); }
+    .tier--brnz .tier-hd { background:linear-gradient(135deg,#b87333,#d4956b); }
+    .tier-label    { font-family:var(--font-body); font-size:.66rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:rgba(0,0,0,.5); margin-bottom:6px; }
+    .tier-amt      { font-family:var(--font-heading); font-size:1.9rem; font-weight:900; color:var(--reva-navy); }
+    .tier-body     { padding:18px 22px; background:var(--reva-white); }
+    .tier-benefit  { display:flex; gap:9px; font-family:var(--font-body); font-size:.81rem; color:var(--reva-text); margin-bottom:9px; }
+    .tier-benefit i { color:var(--reva-orange); font-size:.72rem; margin-top:3px; flex-shrink:0; }
+    .sp-cta        { background:var(--reva-orange); border-radius:var(--radius-lg); padding:32px; text-align:center; color:#fff; }
+    .sp-cta h3     { font-family:var(--font-heading); font-size:1.5rem; margin-bottom:10px; color:#fff; }
+    .sp-cta p      { font-family:var(--font-body); font-size:.88rem; color:rgba(255,255,255,.78); margin-bottom:22px; }
+
+    /* ============================================================
+       CONTACT
+       ============================================================ */
+    .contact-grid  { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+    .ct-item       { display:flex; gap:16px; margin-bottom:22px; }
+    .ct-icon       { width:46px; height:46px; border-radius:var(--radius); background:var(--reva-orange); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .ct-icon i     { color:#fff; font-size:1.05rem; }
+    .ct-item h4    { font-family:var(--font-body); font-size:.73rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--reva-muted); margin-bottom:4px; }
+    .ct-item p, .ct-item a { font-family:var(--font-body); font-size:.88rem; color:var(--reva-text); line-height:1.6; }
+    .map-wrap      { border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 4px 20px var(--reva-shadow); border:1px solid var(--reva-border); height:340px; }
+    .map-wrap iframe { width:100%; height:100%; border:none; }
+    .org-card      { background:var(--reva-orange); border-radius:var(--radius-lg); padding:22px 24px; margin-top:24px; }
+    .org-card h4   { font-family:var(--font-heading); font-size:1rem; color:#fff; margin-bottom:14px; }
+    .org-row       { margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,.15); }
+    .org-row:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+    .org-name      { font-family:var(--font-body); font-size:.86rem; font-weight:700; color:#fff; margin-bottom:2px; }
+    .org-title     { font-family:var(--font-body); font-size:.75rem; color:rgba(255,255,255,.65); margin-bottom:5px; }
+    .org-links     { display:flex; flex-wrap:wrap; gap:12px; }
+    .org-links a   { font-family:var(--font-body); font-size:.75rem; color:rgba(255,255,255,.88); display:flex; align-items:center; gap:5px; }
+    .org-links a:hover { color:#fff; text-decoration:underline; }
+
+    /* ============================================================
+       FOOTER — dark charcoal, REVA research portal style
+       ============================================================ */
+    .footer        { background:var(--reva-footer); color:rgba(255,255,255,.68); padding:48px 0 0; }
+    .footer__grid  { display:grid; grid-template-columns:2fr 1fr 1fr; gap:40px; padding-bottom:40px; }
+    .footer__brand { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+    .footer__logo  { display:flex; align-items:center; flex-shrink:0; background:none; border-radius:0; overflow:visible; }
+    .footer__logo img { height:46px; width:auto; object-fit:contain; display:block; filter:none; }
+    .footer__bname { font-family:var(--font-heading); font-size:.96rem; font-weight:700; color:#fff; }
+    .footer__bsub  { font-family:var(--font-body); font-size:.67rem; color:rgba(255,255,255,.44); }
+    .footer__desc  { font-family:var(--font-body); font-size:.82rem; line-height:1.7; max-width:320px; }
+    .footer__col-h { font-family:var(--font-heading); font-size:.9rem; font-weight:700; color:#fff; margin-bottom:14px; padding-bottom:9px; border-bottom:2px solid rgba(225,134,4,.5); }
+    .footer__links { display:flex; flex-direction:column; gap:7px; }
+    .footer__link  { font-family:var(--font-body); font-size:.81rem; color:rgba(255,255,255,.6); cursor:pointer; transition:color var(--tr); display:flex; align-items:center; gap:7px; }
+    .footer__link::before { content:'›'; color:var(--reva-orange); font-size:1rem; }
+    .footer__link:hover { color:var(--reva-orange); }
+    .footer__cr    { display:flex; gap:9px; font-family:var(--font-body); font-size:.81rem; color:rgba(255,255,255,.58); margin-bottom:9px; align-items:flex-start; }
+    .footer__cr i  { color:var(--reva-orange); width:15px; margin-top:2px; flex-shrink:0; }
+    .footer__cr a  { color:inherit; transition:color var(--tr); }
+    .footer__cr a:hover { color:var(--reva-orange); }
+    .footer__bottom { border-top:1px solid rgba(255,255,255,.07); padding:16px 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+    .footer__copy  { font-family:var(--font-body); font-size:.77rem; color:rgba(255,255,255,.36); }
+    .footer__badge { font-family:var(--font-body); font-size:.75rem; color:rgba(225,134,4,.68); }
+
+    /* Scroll-to-top FAB */
+    .scroll-top    { position:fixed; bottom:26px; right:26px; width:44px; height:44px; background:var(--reva-orange); color:#fff; border:none; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; box-shadow:0 4px 14px var(--reva-shadow); transition:all var(--tr); opacity:0; pointer-events:none; z-index:999; }
+    .scroll-top.visible { opacity:1; pointer-events:auto; }
+    .scroll-top:hover { background:var(--reva-orange-hover); transform:translateY(-2px); }
+
+    /* ============================================================
+       RESPONSIVE — tablet
+       ============================================================ */
+    @media(max-width:960px){
+      .about-grid,.reg-layout,.cfa-layout,
+      .contact-grid,.accomm-grid,.value-row { grid-template-columns:1fr; }
+      .footer__grid { grid-template-columns:1fr 1fr; }
+    }
+    /* ============================================================
+       RESPONSIVE — mobile
+       ============================================================ */
+    @media(max-width:640px){
+      :root{ --pad-section:44px; }
+      .navbar__nav  { display:none; }
+      .nav-burger   { display:flex; }
+      .ticker__contact { display:none; }
+      .hero__banner-wrap img { max-height:260px; }
+      .hero__cta    { flex-direction:column; }
+      .hero__cta .btn { justify-content:center; }
+      .countdown    { gap:8px; }
+      .ct-unit      { padding:10px 12px; min-width:58px; }
+      .ct-num       { font-size:1.5rem; }
+      .topics-grid,.ag-item { grid-template-columns:1fr; }
+      .ag-time      { border-right:none; border-bottom:2px solid var(--reva-orange); padding-bottom:5px; margin-bottom:5px; margin-right:0; }
+      .footer__grid { grid-template-columns:1fr; }
+      .footer__bottom { flex-direction:column; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       TICKER — scrolling announcement bar
+       ============================================================ -->
+  <div class="ticker">
+    <div class="container">
+      <div class="ticker__inner">
+        <span class="ticker__label"><i class="fa fa-bullhorn"></i> &nbsp;Updates</span>
+        <div class="ticker__scroll">
+          <span class="ticker__text">
+            &nbsp;&nbsp;&nbsp; ✦ Abstract Submission Deadline: 1st October 2026 &nbsp;|&nbsp; ✦ Abstract Acceptance: 4th October 2026 &nbsp;|&nbsp; ✦ Full Paper Submission: 10th October 2026 &nbsp;|&nbsp; ✦ Last Date for Registration: 29th October 2026 &nbsp;|&nbsp; ✦ Conference Date: October 30-31, 2026 &nbsp;|&nbsp; ✦ Venue: School of Applied Sciences, REVA University, Bangalore &nbsp;|&nbsp; ✦ Registration Link: forms.gle/hkyvxcdXGoGXdmFW7 &nbsp;|&nbsp; ✦ 7th Edition — ICRTACM-2026 &nbsp;&nbsp;&nbsp;
+          </span>
+        </div>
+        <div class="ticker__contact">
+          <a href="tel:+919845871372"><i class="fa fa-phone"></i> +91-9845871372</a>
+          <a href="mailto:icrtacm_2026@reva.edu.in"><i class="fa fa-envelope"></i> icrtacm_2026@reva.edu.in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NAVBAR — REVA orange sticky bar
+       Logo: ./assets/img/logos/REVA_Logo_2.png
+       ============================================================ -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar__inner">
+        <div class="navbar__brand" onclick="showSection('home')">
+          <div class="navbar__logo">
+            <!-- Horizontal REVA logo: white on transparent, placed directly with no container shape -->
+            <!-- Primary: reva_logo_horizontal.webp (white text, transparent bg) -->
+            <!-- Fallback: REVA_Logo_2.png if webp not supported -->
+            <img src="./assets/img/logos/reva_logo_horizontal.webp"
+                 alt="REVA University"
+                 onerror="this.onerror=null; this.src='./assets/img/logos/REVA_Logo_2.png'; this.style.height='48px'; this.style.filter='brightness(0) invert(1)';" />
+          </div>
+          <div>
+            <div class="navbar__name">ICRTACM-2026</div>
+            <div class="navbar__sub">REVA University, Bangalore</div>
+          </div>
+        </div>
+
+        <ul class="navbar__nav">
+          <li><span class="nav-link active" id="nav-home"        onclick="showSection('home')">Home</span></li>
+          <li><span class="nav-link"        id="nav-about"       onclick="showSection('about')">About</span></li>
+          <li><span class="nav-link"        id="nav-speakers"    onclick="showSection('speakers')">Speakers</span></li>
+          <li><span class="nav-link"        id="nav-agenda"      onclick="showSection('agenda')">Agenda</span></li>
+          <li><span class="nav-link"        id="nav-committees"  onclick="showSection('committees')">Committees</span></li>
+          <li class="nav-dd" id="moreDD">
+            <span class="nav-link" onclick="toggleDD()">More <i class="fa fa-caret-down" style="font-size:.68rem;"></i></span>
+            <div class="nav-dd__menu" id="ddMenu">
+              <span class="nav-dd__item" onclick="showSection('registration')">Registration</span>
+              <span class="nav-dd__item" onclick="showSection('call-for-abstract')">Call for Abstract</span>
+              <span class="nav-dd__item" onclick="showSection('accommodation')">Accommodation</span>
+              <span class="nav-dd__item" onclick="showSection('sponsor-benefits')">Sponsor Benefits</span>
+              <span class="nav-dd__item" onclick="showSection('contact')">Contact</span>
+            </div>
+          </li>
+          <li><span class="nav-link nav-reg" onclick="window.open('https://forms.gle/hkyvxcdXGoGXdmFW7','_blank')">Register Now</span></li>
+        </ul>
+
+        <button class="nav-burger" id="burgerBtn" onclick="toggleMobile()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-mobile" id="mobileNav">
+      <span class="mobile-link active" onclick="showSection('home');closeMobile()">Home</span>
+      <span class="mobile-link"        onclick="showSection('about');closeMobile()">About</span>
+      <span class="mobile-link"        onclick="showSection('speakers');closeMobile()">Speakers</span>
+      <span class="mobile-link"        onclick="showSection('agenda');closeMobile()">Agenda</span>
+      <span class="mobile-link"        onclick="showSection('committees');closeMobile()">Committees</span>
+      <span class="mobile-link"        onclick="showSection('registration');closeMobile()">Registration</span>
+      <span class="mobile-link"        onclick="showSection('call-for-abstract');closeMobile()">Call for Abstract</span>
+      <span class="mobile-link"        onclick="showSection('accommodation');closeMobile()">Accommodation</span>
+      <span class="mobile-link"        onclick="showSection('sponsor-benefits');closeMobile()">Sponsor Benefits</span>
+      <span class="mobile-link"        onclick="showSection('contact');closeMobile()">Contact</span>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       MAIN — all sections are flat siblings
+       ============================================================ -->
+  <main>
+
+    <!-- =========================================================
+         SECTION: HOME
+         ========================================================= -->
+    <section id="home" class="section active">
+
+      <!-- Hero: full-width centered banner image at top, no cropping -->
+      <div class="hero">
+        <div class="hero__ring1"></div>
+        <div class="hero__ring2"></div>
+
+        <!-- Banner image: full width, object-fit:contain so nothing gets trimmed -->
+        <div class="hero__banner-wrap">
+          <img src="./assets/img/banner_maths.png" alt="ICRTACM-2026 Conference Banner"
+               onerror="this.src='./assets/img/banner_hero.jpg'" />
+        </div>
+
+        <!-- Conference info and CTAs below the banner -->
+        <div class="container">
+          <div class="hero__text">
+            <div class="hero__overline"><i class="fa fa-star"></i> 7th Edition &nbsp;·&nbsp; ICRTACM-2026</div>
+            <h1 class="hero__title">International Conference on<br /><span>Recent Trends in Applied &amp;</span><br />Computational Mathematics</h1>
+            <p class="hero__sub">A premier multidisciplinary forum for researchers, scientists, and scholars across applied sciences, healthcare, and life sciences — organized by the Department of Mathematics, School of Applied Sciences, REVA University.</p>
+            <div class="hero__meta">
+              <span class="hero__pill"><i class="fa fa-calendar-alt"></i> October 30-31, 2026</span>
+              <span class="hero__pill"><i class="fa fa-map-marker-alt"></i> REVA University, Bangalore</span>
+              <span class="hero__pill"><i class="fa fa-desktop"></i> Offline Mode</span>
+            </div>
+            <div class="hero__cta">
+              <a href="https://forms.gle/hkyvxcdXGoGXdmFW7" target="_blank" class="btn btn--primary"><i class="fa fa-user-plus"></i> Register Now</a>
+              <a href="./assets/docs/ICRTACM_2026_final.pdf" target="_blank" class="btn btn--ghost"><i class="fa fa-download"></i> Brochure</a>
+              <span class="btn btn--ghost" onclick="showSection('call-for-abstract')"><i class="fa fa-file-alt"></i> Call for Abstract</span>
+            </div>
+            <p class="ct-lbl-row">Conference Begins In</p>
+            <div class="countdown">
+              <div class="ct-unit"><span class="ct-num" id="ctDays">-</span><span class="ct-unit-lbl">Days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-unit"><span class="ct-num" id="ctHours">-</span><span class="ct-unit-lbl">Hours</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-unit"><span class="ct-num" id="ctMins">-</span><span class="ct-unit-lbl">Mins</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-unit"><span class="ct-num" id="ctSecs">-</span><span class="ct-unit-lbl">Secs</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dates + Fees -->
+      <div class="container">
+        <div class="home-grid">
+          <div class="tbl-card">
+            <div class="tbl-card__hd"><i class="fa fa-calendar-alt"></i><span class="tbl-card__title">Important Dates</span></div>
+            <table class="data-tbl">
+              <thead><tr><th>Date</th><th>Event</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>1st Oct, 2026</td><td>Abstract Submission Deadline</td><td><span class="badge badge--open">Open</span></td></tr>
+                <tr><td>4th Oct, 2026</td><td>Abstract Acceptance Notification</td><td><span class="badge badge--conf">Confirmed</span></td></tr>
+                <tr><td>10th Oct, 2026</td><td>Full Length Paper Submission</td><td><span class="badge badge--conf">Confirmed</span></td></tr>
+                <tr><td>29th Oct, 2026</td><td>Last Date for Registration</td><td><span class="badge badge--conf">Confirmed</span></td></tr>
+                <tr class="hl"><td>Oct 30–31, 2026</td><td>Conference Days</td><td><span class="badge badge--conf">Confirmed</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tbl-card">
+            <div class="tbl-card__hd"><i class="fa fa-tags"></i><span class="tbl-card__title">Registration Fees</span></div>
+            <table class="data-tbl">
+              <thead><tr><th>Category</th><th>Fee</th></tr></thead>
+              <tbody>
+                <tr><td>Delegates from Industry</td><td>Rs. 2,500 /-</td></tr>
+                <tr><td>Faculty</td><td>Rs. 2,000 /-</td></tr>
+                <tr><td>Research Scholars</td><td>Rs. 1,500 /-</td></tr>
+                <tr><td>Students (PG / UG)</td><td>Rs. 800 /-</td></tr>
+                <tr class="hl"><td>International Delegates</td><td>$ 100 USD</td></tr>
+              </tbody>
+            </table>
+            <div style="padding:11px 16px;font-family:var(--font-body);font-size:.74rem;color:var(--reva-muted);border-top:1px solid var(--reva-border-lt);">* International participants use USD. Fee based on citizenship, not nationality.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SECTION: ABOUT
+         Campus image: ./assets/img/campus_main.jpg
+         Dept logo: ./assets/img/logos/maths_dept.png
+         ========================================================= -->
+    <section id="about" class="section section--alt">
+      <div class="container">
+        <div class="sec-hd">
+          <span class="sec-hd__label">Overview</span>
+          <h2 class="sec-hd__title">About ICRTACM-2026</h2>
+          <div class="sec-hd__rule"></div>
+          <p class="sec-hd__sub">7th International Conference on Recent Trends in Applied and Computational Mathematics</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-body">
+            <h3 class="about-h3">About REVA University</h3>
+            <p>REVA University is a state private university established in 2012 under the Government of Karnataka Act No. 13, located in Bengaluru, India’s leading technology hub. Recognised by the University Grants Commission (UGC) and approved by the All India Council for Technical Education (AICTE), the University has earned an A+ grade from NAAC, reflecting its commitment to academic excellence and institutional quality. Its eco-friendly 43-acre campus provides a dynamic environment for learning, innovation, and holistic development.</p>
+            <p>The University offers a wide range of undergraduate, postgraduate, and doctoral programmes, along with diploma and certificate courses across disciplines such as Engineering, Design, Commerce, Management, Law, Architecture, Liberal Studies, and Performing Arts. Each programme is designed to integrate academic rigour with industry relevance, hands-on learning, and innovation, preparing students for global careers.</p>
+            <p>At the heart of REVA’s philosophy is its guiding principle, “Educate to Enterprise,” which fosters entrepreneurial thinking, creativity, and leadership across disciplines. Students are empowered to become innovators and problem-solvers equipped to address real-world challenges.</p>
+            <p>The campus features advanced infrastructure, including smart classrooms, AR/VR labs, innovation and fabrication labs, modern libraries, sports facilities, and residential spaces. Through clubs, societies, NCC, NSS, and REVA NEST—the University’s incubation centre—students actively engage in entrepreneurship and innovation.</p>
+            <p>REVA University places a strong emphasis on research and innovation, with specialised centres in Food Science, Biotechnology, Nano Research, and Advanced Materials driving interdisciplinary exploration and impactful outcomes. The University’s Career Development Centre (CDC) plays a pivotal role in strengthening industry connections, offering students access to internships, career guidance, and excellent placement opportunities through robust corporate partnerships.</p>
+            <p>Life at REVA is vibrant, diverse, and inclusive, seamlessly blending academic excellence with cultural and extracurricular engagement. With a student-centric ecosystem, global outlook, and state-of-the-art infrastructure, REVA University ensures a well-rounded and enriching educational experience.</p>
+
+            <h3 class="about-h3">About the School of Applied Sciences</h3>
+            <p>The School of Applied Sciences is driven by well-qualified and dedicated faculty members. It is equipped with state-of-the-art laboratories, digital classrooms, and a peaceful academic environment that supports both knowledge transfer and creation.</p>
+            <p>The school is known for:</p>
+            <ul style="list-style:disc; margin-left: 20px; margin-bottom: 16px; font-size: 0.96rem;">
+              <li>Collaborations with leading industries and research organizations</li>
+              <li>Fostering critical thinking and problem-solving skills</li>
+              <li>Encouraging innovative research</li>
+            </ul>
+            <p>The school has published numerous peer-reviewed articles in national and international journals and has also secured patents and research grants from esteemed funding bodies like DST, DBT, VGST, ICMR, and the Coir Board. Research domains span Biotechnology, Biochemistry, Chemistry, Physics, and Mathematics.</p>
+
+            <h3 class="about-h3">About the Department of Mathematics</h3>
+            <p>The Department of Mathematics at REVA University focuses on both Pure and Applied Mathematics, catering to students from diverse academic backgrounds. It offers:</p>
+            <ul style="list-style:disc; margin-left: 20px; margin-bottom: 16px; font-size: 0.96rem;">
+              <li>A full-time M.Sc. Program in Mathematics</li>
+              <li>Doctoral and Post-doctoral Research Programs</li>
+            </ul>
+            <p>The department proudly celebrates the successful completion of Ph.D. degrees by 28+ research scholars. The faculty is highly qualified and actively engaged in teaching, research, and continuing education initiatives.</p>
+
+            <h3 class="about-h3">About the Conference</h3>
+            <p>The 7th International Conference on Recent Trends in Applied and Computational Mathematics (ICRTACAM 2026) is envisioned as a premier global forum that celebrates innovation, fosters collaboration, and advances research in the field of applied and computational mathematics. The conference brings together leading academicians, researchers, scientists, and industry experts from across the world to exchange ideas, present cutting-edge research, and explore emerging trends in mathematics and its interdisciplinary applications.</p>
+            <p><strong>Conference Highlights:</strong></p>
+            <ul style="list-style:disc; margin-left: 20px; margin-bottom: 16px; font-size: 0.96rem;">
+              <li>Keynote and invited talks by internationally renowned experts</li>
+              <li>Technical sessions featuring peer-reviewed research papers</li>
+              <li>Panel discussions on emerging research challenges</li>
+              <li>Presentations by young researchers and scholars</li>
+            </ul>
+            <h3 class="about-h3">Major Focus Areas</h3>
+            <p>The conference will cover (but is not limited to):</p>
+            <div class="topics-grid">
+              <div class="topic-pill"><i class="fa fa-chevron-right"></i>Applied &amp; Computational Mathematics</div>
+              <div class="topic-pill"><i class="fa fa-chevron-right"></i>Operations Research &amp; Optimization</div>
+              <div class="topic-pill"><i class="fa fa-chevron-right"></i>Numerical Analysis &amp; Scientific Computing</div>
+              <div class="topic-pill"><i class="fa fa-chevron-right"></i>Computational Fluid Mechanics</div>
+              <div class="topic-pill"><i class="fa fa-chevron-right"></i>Graph Theory &amp; Network Analysis</div>
+              <div class="topic-pill"><i class="fa fa-chevron-right"></i>Algebra and Discrete Mathematics</div>
+              <div class="topic-pill"><i class="fa fa-chevron-right"></i>Fuzzy Logic and Soft Computing</div>
+              <div class="topic-pill"><i class="fa fa-chevron-right"></i>Statistical Methods &amp; Data Science</div>
+              <div class="topic-pill"><i class="fa fa-chevron-right"></i>Mathematical Modelling in Engineering and Sciences</div>
+            </div>
+            <p style="margin-top: 16px;"><strong>Conference Vision:</strong></p>
+            <ul style="list-style:disc; margin-left: 20px; margin-bottom: 16px; font-size: 0.96rem;">
+              <li>Promote high-quality research and innovation</li>
+              <li>Strengthen academic–industry collaboration</li>
+              <li>Provide a global platform for knowledge exchange</li>
+              <li>Encourage interdisciplinary research and applications</li>
+            </ul>
+          </div>
+          <div class="about-sidebar">
+            <!-- Campus photo -->
+            <div class="campus-img">
+              <img src="./assets/img/campus_main.jpg" alt="REVA University Campus"
+                   onerror="this.src='./assets/img/campus_alt.jpg'" />
+            </div>
+            <div class="icard">
+              <div class="icard__hd"><i class="fa fa-info-circle"></i><h4>Conference at a Glance</h4></div>
+              <div class="icard__body">
+                <div class="icard__row"><i class="fa fa-hashtag"></i><div><span class="icard__row-label">Edition</span><span class="icard__row-val">7th International — ICRTACM-2026</span></div></div>
+                <div class="icard__row"><i class="fa fa-calendar"></i><div><span class="icard__row-label">Date</span><span class="icard__row-val">October 30-31, 2026</span></div></div>
+                <div class="icard__row"><i class="fa fa-map-marker-alt"></i><div><span class="icard__row-label">Venue</span><span class="icard__row-val">School of Applied Sciences, REVA University, Yelahanka, Bangalore - 560 064</span></div></div>
+                <div class="icard__row"><i class="fa fa-desktop"></i><div><span class="icard__row-label">Mode</span><span class="icard__row-val">Offline (In-Person)</span></div></div>
+                <div class="icard__row"><i class="fa fa-envelope"></i><div><span class="icard__row-label">Email</span><span class="icard__row-val"><a href="mailto:icrtacm_2026@reva.edu.in">icrtacm_2026@reva.edu.in</a></span></div></div>
+                <div class="icard__row"><i class="fa fa-phone"></i><div><span class="icard__row-label">Phone</span><span class="icard__row-val"><a href="tel:+919845871372">+91-9845871372</a></span></div></div>
+              </div>
+            </div>
+            <!-- Dept logo card -->
+            <div class="dept-card">
+              <img src="./assets/img/logos/maths_dept.png" alt="Department of Mathematics"
+                   onerror="this.style.display='none'" />
+              <div style="font-family:var(--font-heading);font-size:.88rem;color:var(--reva-navy);font-weight:700;">Department of Mathematics</div>
+              <div style="font-family:var(--font-body);font-size:.76rem;color:var(--reva-muted);margin-top:3px;">School of Applied Sciences, REVA University</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SECTION: SPEAKERS
+         Photos: ./assets/img/speakers/S1.png to S8.png
+         ========================================================= -->
+    <section id="speakers" class="section">
+      <div class="container">
+        <div class="sec-hd">
+          <span class="sec-hd__label">Distinguished Voices</span>
+          <h2 class="sec-hd__title">Keynote &amp; Invited Speakers</h2>
+          <div class="sec-hd__rule"></div>
+          <p class="sec-hd__sub">We are honoured to host leading mathematicians and scientists from premier institutions across India and abroad.</p>
+        </div>
+
+        <!-- Keynote Speakers -->
+        <div style="text-align: center; margin-bottom: 32px;">
+          <h3 class="about-h3" style="display: inline-block; border-left: none; padding-left: 0; border-bottom: 3px solid var(--reva-orange); padding-bottom: 5px; margin-top: 0;">Key Note Speakers</h3>
+        </div>
+        <div class="spk-grid" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 22px; margin-bottom: 64px;">
+
+          <!-- Keynote Speaker 1: Prof. G.P. Raja Sekhar -->
+          <div class="spk-card" style="max-width: 280px; width: 100%;">
+            <div class="spk-photo">
+              <img src="./assets/img/speakers/KNS1.png" alt="Prof. G.P. Raja Sekhar"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="spk-avatar" style="display:none"><i class="fa fa-user-tie"></i></div>
+            </div>
+            <div class="spk-body">
+              <div class="spk-name">Prof. G.P. Raja Sekhar</div>
+              <div class="spk-affil">Vice-Chancellor<br/>Andhra University, Visakhapatnam<br/>Andhra Pradesh, India</div>
+              <div class="spk-topic" style="text-align: center; border-left: none;">Key Note Speaker</div>
+            </div>
+          </div>
+
+          <!-- Keynote Speaker 2: Sihem MESNAGER -->
+          <div class="spk-card" style="max-width: 280px; width: 100%;">
+            <div class="spk-photo">
+              <img src="./assets/img/speakers/KNS2.png" alt="Sihem MESNAGER"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="spk-avatar" style="display:none"><i class="fa fa-user-tie"></i></div>
+            </div>
+            <div class="spk-body">
+              <div class="spk-name">Sihem MESNAGER</div>
+              <div class="spk-affil">Professor of Mathematics<br/>The University of Paris VIII<br/>Saint-Denis Cedex 02, France</div>
+              <div class="spk-topic" style="text-align: center; border-left: none;">Key Note Speaker</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Plenary Speakers -->
+        <div style="text-align: center; margin-bottom: 32px;">
+          <h3 class="about-h3" style="display: inline-block; border-left: none; padding-left: 0; border-bottom: 3px solid var(--reva-orange); padding-bottom: 5px; margin-top: 0;">Plenary Speakers</h3>
+        </div>
+        <div class="spk-grid">
+
+          <!-- Speaker 1: Dr. Snehashish Chakraverty -->
+          <div class="spk-card">
+            <div class="spk-photo">
+              <img src="./assets/img/speakers/S1.png" alt="Dr. Snehashish Chakraverty"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="spk-avatar" style="display:none"><i class="fa fa-user-tie"></i></div>
+            </div>
+            <div class="spk-body">
+              <div class="spk-name">Dr. Snehashish Chakraverty</div>
+              <div class="spk-affil">Professor (Higher Administrative Grade)<br/>Department of Mathematics<br/>NIT Rourkela, Odisha, India</div>
+              <div class="spk-topic">Fuzzy Mathematics &amp; Uncertainty Modelling</div>
+            </div>
+          </div>
+
+          <!-- Speaker 2: Dr. Adrijit Goswami -->
+          <div class="spk-card">
+            <div class="spk-photo">
+              <img src="./assets/img/speakers/S2.png" alt="Dr. Adrijit Goswami"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="spk-avatar" style="display:none"><i class="fa fa-user-tie"></i></div>
+            </div>
+            <div class="spk-body">
+              <div class="spk-name">Dr. Adrijit Goswami</div>
+              <div class="spk-affil">Professor, Department of Mathematics<br/>Indian Institute of Technology Kharagpur, India</div>
+              <div class="spk-topic">Operations Research &amp; Optimization</div>
+            </div>
+          </div>
+
+          <!-- Speaker 3: Dr. Om Prakash -->
+          <div class="spk-card">
+            <div class="spk-photo">
+              <img src="./assets/img/speakers/S3.png" alt="Dr. Om Prakash"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="spk-avatar" style="display:none"><i class="fa fa-user-tie"></i></div>
+            </div>
+            <div class="spk-body">
+              <div class="spk-name">Dr. Om Prakash</div>
+              <div class="spk-affil">Professor, Department of Mathematics<br/>Indian Institute of Technology Patna, India</div>
+              <div class="spk-topic">Algebra &amp; Coding Theory</div>
+            </div>
+          </div>
+
+          <!-- Speaker 4: Dr. Bhupendra Singh -->
+          <div class="spk-card">
+            <div class="spk-photo">
+              <img src="./assets/img/speakers/S4.png" alt="Dr. Bhupendra Singh"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="spk-avatar" style="display:none"><i class="fa fa-user-tie"></i></div>
+            </div>
+            <div class="spk-body">
+              <div class="spk-name">Dr. Bhupendra Singh</div>
+              <div class="spk-affil">Senior Scientist<br/>Centre for AI &amp; Robotics (CAIR), DRDO<br/>Bengaluru, India</div>
+              <div class="spk-topic">Artificial Intelligence &amp; Robotics Applications</div>
+            </div>
+          </div>
+
+          <!-- Speaker 5: Dr. R. Sivaraj -->
+          <div class="spk-card">
+            <div class="spk-photo">
+              <img src="./assets/img/speakers/S5.png" alt="Dr. R. Sivaraj"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="spk-avatar" style="display:none"><i class="fa fa-user-tie"></i></div>
+            </div>
+            <div class="spk-body">
+              <div class="spk-name">Dr. R. Sivaraj</div>
+              <div class="spk-affil">Department of Mathematics and Computing<br/>Dr. B R Ambedkar NIT Jalandhar, Punjab, India</div>
+              <div class="spk-topic">Computational Fluid Dynamics &amp; Heat Transfer</div>
+            </div>
+          </div>
+
+          <!-- Speaker 6: Dr. Amlan K Barua -->
+          <div class="spk-card">
+            <div class="spk-photo">
+              <img src="./assets/img/speakers/S6.png" alt="Dr. Amlan K Barua"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="spk-avatar" style="display:none"><i class="fa fa-user-tie"></i></div>
+            </div>
+            <div class="spk-body">
+              <div class="spk-name">Dr. Amlan K Barua</div>
+              <div class="spk-affil">Associate Professor, Department of Mathematics<br/>Indian Institute of Technology Dharwad, Karnataka, India</div>
+              <div class="spk-topic">Applied Mathematics &amp; Scientific Computing</div>
+            </div>
+          </div>
+
+        </div><!-- /.spk-grid -->
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SECTION: AGENDA
+         ========================================================= -->
+    <section id="agenda" class="section section--alt">
+      <div class="container">
+        <div class="sec-hd">
+          <span class="sec-hd__label">Programme</span>
+          <h2 class="sec-hd__title">Conference Agenda</h2>
+          <div class="sec-hd__rule"></div>
+          <p class="sec-hd__sub">Two full days of keynote addresses, oral presentations, poster sessions, and networking at REVA University.</p>
+        </div>
+        <div class="ag-tabs">
+          <div class="ag-tab active" id="tab-d1" onclick="switchDay('d1')"><i class="fa fa-sun" style="margin-right:6px;"></i>Day 1 — October 30, 2026</div>
+          <div class="ag-tab"        id="tab-d2" onclick="switchDay('d2')"><i class="fa fa-sun" style="margin-right:6px;"></i>Day 2 — October 31, 2026</div>
+        </div>
+        <!-- Day 1 -->
+        <div class="ag-day active" id="ag-d1">
+          <div class="tbl-card"><div style="padding:0 4px;">
+            <div class="ag-item ag-item--brk"><div class="ag-time">08:30 - 09:00</div><div class="ag-body"><div class="ag-title">Registration &amp; Welcome Kit Collection</div><div class="ag-detail">Conference Registration Desk, REVA University</div></div></div>
+            <div class="ag-item"><div class="ag-time">09:00 - 09:45</div><div class="ag-body"><div class="ag-title">Inaugural Ceremony</div><div class="ag-detail">Welcome Address · Lamp Lighting · Address by the Vice Chancellor, REVA University</div></div></div>
+            <div class="ag-item"><div class="ag-time">09:45 - 10:30</div><div class="ag-body"><div class="ag-title">Keynote Address — I</div><div class="ag-detail">Speaker: To Be Announced</div></div></div>
+            <div class="ag-item"><div class="ag-time">10:30 - 11:15</div><div class="ag-body"><div class="ag-title">Keynote Address — II</div><div class="ag-detail">Speaker: To Be Announced</div></div></div>
+            <div class="ag-item ag-item--brk"><div class="ag-time">11:15 - 11:30</div><div class="ag-body"><div class="ag-title">Tea / Coffee Break &amp; Networking</div><div class="ag-detail">Conference Lounge</div></div></div>
+            <div class="ag-item"><div class="ag-time">11:30 - 13:00</div><div class="ag-body"><div class="ag-title">Oral Presentations — Session I</div><div class="ag-detail">Fluid Dynamics · Graph Theory · Operations Research (15 min per speaker incl. Q&amp;A)</div></div></div>
+            <div class="ag-item ag-item--brk"><div class="ag-time">13:00 - 14:00</div><div class="ag-body"><div class="ag-title">Lunch Break</div><div class="ag-detail">University Dining Hall</div></div></div>
+            <div class="ag-item"><div class="ag-time">14:00 - 15:30</div><div class="ag-body"><div class="ag-title">Oral Presentations — Session II</div><div class="ag-detail">Algebra · Differential Equations · Geometry</div></div></div>
+            <div class="ag-item"><div class="ag-time">15:30 - 17:00</div><div class="ag-body"><div class="ag-title">Poster Presentations — Session I</div><div class="ag-detail">Poster Hall &nbsp;·&nbsp; Poster size: 90 cm (W) x 120 cm (H)</div></div></div>
+            <div class="ag-item ag-item--brk"><div class="ag-time">17:00 - 17:30</div><div class="ag-body"><div class="ag-title">Evening Tea</div><div class="ag-detail">Campus Grounds</div></div></div>
+          </div></div>
+        </div>
+        <!-- Day 2 -->
+        <div class="ag-day" id="ag-d2">
+          <div class="tbl-card"><div style="padding:0 4px;">
+            <div class="ag-item"><div class="ag-time">09:00 - 09:45</div><div class="ag-body"><div class="ag-title">Keynote Address — III</div><div class="ag-detail">Speaker: To Be Announced</div></div></div>
+            <div class="ag-item"><div class="ag-time">09:45 - 10:30</div><div class="ag-body"><div class="ag-title">Invited Talk</div><div class="ag-detail">Speaker: To Be Announced</div></div></div>
+            <div class="ag-item ag-item--brk"><div class="ag-time">10:30 - 10:45</div><div class="ag-body"><div class="ag-title">Tea / Coffee Break</div><div class="ag-detail">Conference Lounge</div></div></div>
+            <div class="ag-item"><div class="ag-time">10:45 - 12:30</div><div class="ag-body"><div class="ag-title">Oral Presentations — Session III</div><div class="ag-detail">Complex Analysis · Number Theory · Numerical Analysis</div></div></div>
+            <div class="ag-item ag-item--brk"><div class="ag-time">12:30 - 13:30</div><div class="ag-body"><div class="ag-title">Lunch Break</div><div class="ag-detail">University Dining Hall</div></div></div>
+            <div class="ag-item"><div class="ag-time">13:30 - 15:00</div><div class="ag-body"><div class="ag-title">Oral Presentations — Session IV</div><div class="ag-detail">Computational Fluid Mechanics · Mathematical Modelling · Statistical Methods</div></div></div>
+            <div class="ag-item"><div class="ag-time">15:00 - 16:00</div><div class="ag-body"><div class="ag-title">Poster Presentations — Session II</div><div class="ag-detail">Fuzzy Logic &amp; Applications · Mathematical Biology</div></div></div>
+            <div class="ag-item ag-item--brk"><div class="ag-time">16:00 - 16:45</div><div class="ag-body"><div class="ag-title">Valedictory Ceremony &amp; Best Paper Award</div><div class="ag-detail">Best Paper &amp; Poster Awards · Certificates distributed to all participants</div></div></div>
+          </div></div>
+        </div>
+        <div class="theme-bar">
+          <h3>Thematic Areas of the Conference</h3>
+          <div class="theme-pills">
+            <span class="t-pill">Applied &amp; Computational Mathematics</span><span class="t-pill">Operations Research &amp; Optimization</span><span class="t-pill">Numerical Analysis &amp; Scientific Computing</span><span class="t-pill">Computational Fluid Mechanics</span><span class="t-pill">Graph Theory &amp; Network Analysis</span><span class="t-pill">Algebra and Discrete Mathematics</span><span class="t-pill">Fuzzy Logic and Soft Computing</span><span class="t-pill">Statistical Methods &amp; Data Science</span><span class="t-pill">Mathematical Modelling in Engineering</span><span class="t-pill">Fluid Dynamics</span><span class="t-pill">Differential Equations</span><span class="t-pill">Mathematical Biology</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SECTION: COMMITTEES — all real names from 6th edition
+         ========================================================= -->
+    <section id="committees" class="section">
+      <div class="container">
+        <div class="sec-hd">
+          <span class="sec-hd__label">Organisation</span>
+          <h2 class="sec-hd__title">Conference Committees</h2>
+          <div class="sec-hd__rule"></div>
+        </div>
+        <div class="patron-grid">
+          <div class="patron-card"><div class="patron-lbl">Chief Patron</div><div class="patron-name">Dr. P. Shyama Raju</div><div class="patron-role">Hon'ble Chancellor, REVA University</div></div>
+          <div class="patron-card"><div class="patron-lbl">Chief Patron</div><div class="patron-name">Sri. Umesh Raju</div><div class="patron-role">Pro Chancellor, REVA University</div></div>
+          <div class="patron-card"><div class="patron-lbl">Patron</div><div class="patron-name">Dr. Sanjay Chitnis</div><div class="patron-role">Vice-Chancellor, REVA University</div></div>
+          <div class="patron-card"><div class="patron-lbl">Patron</div><div class="patron-name">Dr. Dhanamjaya M</div><div class="patron-role">Registrar, REVA University</div></div>
+        </div>
+        <div class="comm-tabs">
+          <div class="comm-tab active" id="ctab-org"  onclick="switchComm('org')">Organising Committee</div>
+          <div class="comm-tab"        id="ctab-loc"  onclick="switchComm('loc')">Local Advisory</div>
+          <div class="comm-tab"        id="ctab-intl" onclick="switchComm('intl')">National / International Advisory</div>
+        </div>
+        <!-- Organising -->
+        <div class="comm-panel active" id="cpanel-org">
+          <div class="member-grid">
+            <div class="member-card"><div class="member-av">BS</div><div><div class="member-name">Dr. Bharathi S. H.</div><div class="member-role">Organising Secretary · Dean, School of Applied Sciences, REVA University, Bengaluru</div></div></div>
+            <div class="member-card"><div class="member-av">SB</div><div><div class="member-name">Dr. B. R. Shilpa</div><div class="member-role">Organising Secretary · Director, School of Applied Sciences, REVA University, Bengaluru</div></div></div>
+            <div class="member-card"><div class="member-av">VV</div><div><div class="member-name">Dr. S. Vijaya Kumar Varma</div><div class="member-role">Organising Secretary · Emeritus Professor, Department of Mathematics, REVA University, Bengaluru</div></div></div>
+            <div class="member-card"><div class="member-av">VM</div><div><div class="member-name">Dr. Vishu Kumar M.</div><div class="member-role">Convener · Professor &amp; HoD, Department of Mathematics, School of Applied Sciences, REVA University<br/><a href="tel:+919845871372">+91-9845871372</a> · <a href="mailto:vishukumarm@reva.edu.in">vishukumarm@reva.edu.in</a></div></div></div>
+            <div class="member-card"><div class="member-av">UV</div><div><div class="member-name">Dr. U Vijaya Chandra Kumar</div><div class="member-role">Co-Convener · Associate Professor, Department of Mathematics, School of Applied Sciences, REVA University<br/><a href="tel:+919866309877">+91-9866309877</a> · <a href="mailto:uvijaychandra.kumar@reva.edu.in">uvijaychandra.kumar@reva.edu.in</a></div></div></div>
+          </div>
+        </div>
+        <!-- Local Advisory -->
+        <div class="comm-panel" id="cpanel-loc">
+          <div class="member-grid">
+            <div class="member-card"><div class="member-av">MR</div><div><div class="member-name">Dr. Madhusudhan Reddy</div><div class="member-role">Professor &amp; Head, Dept. of Chemistry, REVA University, Bengaluru</div></div></div>
+            <div class="member-card"><div class="member-av">SD</div><div><div class="member-name">Dr. Sunitha D. V.</div><div class="member-role">Professor &amp; Head, Dept. of Physics, REVA University, Bengaluru</div></div></div>
+            <div class="member-card"><div class="member-av">SM</div><div><div class="member-name">Dr. Sikandar Mulla</div><div class="member-role">Associate Professor &amp; Head (I/C), Dept. of Biochemistry, REVA University, Bengaluru</div></div></div>
+          </div>
+        </div>
+       <!-- National/International Advisory -->
+        <div class="comm-panel" id="cpanel-intl">
+          <div class="member-grid">
+            <div class="member-card"><div class="member-av">IC</div><div><div class="member-name">Prof. Ismail Naci Cangul</div><div class="member-role">Professor, Department of Mathematics, Bursa Uludag University, Gorukle 16059, Bursa, Turkey</div></div></div>
+            <div class="member-card"><div class="member-av">NM</div><div><div class="member-name">Prof. Nabil Mlaiki</div><div class="member-role">Professor, Department of Mathematics and Sciences, Prince Sultan University, P.O. Box 66833, Riyadh 11586, Saudi Arabia</div></div></div>
+            <div class="member-card"><div class="member-av">KA</div><div><div class="member-name">Prof. Khaled Al-Farhany</div><div class="member-role">Professor, Department of Mechanical Engineering, University of Al-Qadisiyah, Al-Qadisiyah, Iraq</div></div></div>
+            <div class="member-card"><div class="member-av">SG</div><div><div class="member-name">Prof. Sreedhara Rao Gunakala</div><div class="member-role">Head, Department of Mathematics and Statistics, University of the West Indies, Faculty of Science and Technology Building, Trinidad and Tobago</div></div></div>
+            <div class="member-card"><div class="member-av">KM</div><div><div class="member-name">Prof. Kotelnikova M S</div><div class="member-role">Lavrentyev Institute of Hydrodynamics, Russian Academy of Sciences, Novosibirsk, Russia</div></div></div>
+            <div class="member-card"><div class="member-av">MN</div><div><div class="member-name">Dr. Mahesha Narayana</div><div class="member-role">Head and Senior Lecturer, Department of Mathematics, University of the West Indies, Mona Campus, Jamaica</div></div></div>
+            <div class="member-card"><div class="member-av">MS</div><div><div class="member-name">Dr. Mallikarjunaiah S M</div><div class="member-role">Associate Professor, College of Science and Mathematics, Texas A&amp;M University–Corpus Christi, Corpus Christi, TX, USA</div></div></div>
+            <div class="member-card"><div class="member-av">LT</div><div><div class="member-name">Dr. Lama Tarsissi</div><div class="member-role">Associate Professor, Department of Mathematics and Computer Science, Sorbonne University, Abu Dhabi, UAE</div></div></div>
+            <div class="member-card"><div class="member-av">KR</div><div><div class="member-name">Dr. Khalil Ur Rehman</div><div class="member-role">Assistant Professor, Prince Sultan University, Riyadh, Saudi Arabia</div></div></div>
+            <div class="member-card"><div class="member-av">NS</div><div><div class="member-name">Dr. Nehad Ali Shah</div><div class="member-role">Assistant Professor, Department of Mechanical Engineering, Sejong University, Seoul, South Korea</div></div></div>
+            <div class="member-card"><div class="member-av">ND</div><div><div class="member-name">Prof. Nandakumaran</div><div class="member-role">Professor &amp; Chairman, Department of Mathematics, Indian Institute of Science, Bengaluru – 560012, India</div></div></div>
+            <div class="member-card"><div class="member-av">TG</div><div><div class="member-name">Prof. Thirupathi Gudi</div><div class="member-role">Professor, Department of Mathematics, Indian Institute of Science, Bengaluru – 560012, India</div></div></div>
+            <div class="member-card"><div class="member-av">MT</div><div><div class="member-name">M. Thiruchelvi</div><div class="member-role">Scientist F, Defence Research and Development Organisation, C.V. Raman Nagar, Bengaluru – 560093, India</div></div></div>
+            <div class="member-card"><div class="member-av">VS</div><div><div class="member-name">Dr. V. Sakthivel Samy</div><div class="member-role">Scientist F, National Centre for Polar and Ocean Research, Goa, India</div></div></div>
+            <div class="member-card"><div class="member-av">BJ</div><div><div class="member-name">Dr. Boby John</div><div class="member-role">Scientist, Indian Statistical Institute, Bengaluru – 560059, India</div></div></div>
+            <div class="member-card"><div class="member-av">PS</div><div><div class="member-name">Prof. Pankaj Srivastava</div><div class="member-role">Professor, Department of Mathematics, Motilal Nehru National Institute of Technology, Prayagraj – 211004, India</div></div></div>
+            <div class="member-card"><div class="member-av">SR</div><div><div class="member-name">Prof. Sumithra R</div><div class="member-role">Director, School of Computational Sciences, Nrupathunga University, Bengaluru, Karnataka, India</div></div></div>
+            <div class="member-card"><div class="member-av">RB</div><div><div class="member-name">Prof. Rashmi Bhardwaj</div><div class="member-role">Professor, Nonlinear Dynamics Research Lab, Guru Gobind Singh Indraprastha University, Dwarka, New Delhi – 110078, India</div></div></div>
+            <div class="member-card"><div class="member-av">GJ</div><div><div class="member-name">Prof. B. J. Gireesha</div><div class="member-role">Professor, Department of Mathematics, Kuvempu University, Jnanasahyadri – 577451, Karnataka, India</div></div></div>
+            <div class="member-card"><div class="member-av">VP</div><div><div class="member-name">Prof. Vallampati Ramachandra Prasad</div><div class="member-role">Professor, School of Advanced Sciences, Vellore Institute of Technology, Vellore, Tamil Nadu, India</div></div></div>
+            <div class="member-card"><div class="member-av">MR</div><div><div class="member-name">Prof. M. C. Raju</div><div class="member-role">Professor, JNTUA College of Engineering, Kalikiri, Andhra Pradesh, India</div></div></div>
+            <div class="member-card"><div class="member-av">MM</div><div><div class="member-name">Prof. M. S. Mahadeva Naika</div><div class="member-role">Professor (Retd.), Department of Mathematics, Bengaluru City University, Central College, Bengaluru, India</div></div></div>
+            <div class="member-card"><div class="member-av">PK</div><div><div class="member-name">Dr. B. C. Prasanna Kumara</div><div class="member-role">Professor, Davanagere University, Karnataka, India</div></div></div>
+            <div class="member-card"><div class="member-av">HR</div><div><div class="member-name">Prof. Hari Ponnamma Rani</div><div class="member-role">Professor, Department of Mathematics, National Institute of Technology Warangal, Warangal – 506004, Telangana, India</div></div></div>
+            <div class="member-card"><div class="member-av">RK</div><div><div class="member-name">Dr. Rushi Kumar B.</div><div class="member-role">Associate Professor, Vellore Institute of Technology, Vellore, Tamil Nadu, India</div></div></div>
+            <div class="member-card"><div class="member-av">CR</div><div><div class="member-name">Dr. Chakravarthula S. K. Raju</div><div class="member-role">Associate Professor, Department of Mathematics, Warangal, Telangana, India</div></div></div>
+            <div class="member-card"><div class="member-av">SV</div><div><div class="member-name">Dr. Sreekar Vadlamani</div><div class="member-role">Associate Professor, TIFR Centre for Applicable Mathematics, Bengaluru – 560065, India</div></div></div>
+            <div class="member-card"><div class="member-av">MJ</div><div><div class="member-name">Dr. Manjunatha S</div><div class="member-role">Associate Professor, Christ University, Bengaluru, Karnataka, India</div></div></div>
+            <div class="member-card"><div class="member-av">ML</div><div><div class="member-name">Dr. M. L. Munjal</div><div class="member-role">Professor (Emeritus), Department of Mechanical Engineering, Indian Institute of Science, Bengaluru – 560012, India</div></div></div>
+          </div>        </div>
+    </section>
+
+
+    <!-- =========================================================
+         SECTION: REGISTRATION
+         QR code: ./assets/img/payment_qr.png
+         ========================================================= -->
+    <section id="registration" class="section section--alt">
+      <div class="container">
+        <div class="sec-hd">
+          <span class="sec-hd__label">Join Us</span>
+          <h2 class="sec-hd__title">Registration</h2>
+          <div class="sec-hd__rule"></div>
+          <p class="sec-hd__sub">Register for ICRTACM-2026 and be part of the 7th international edition at REVA University.</p>
+        </div>
+        <div class="reg-layout">
+          <div>
+            <div class="tbl-card" style="margin-bottom:24px;">
+              <div class="tbl-card__hd"><i class="fa fa-tags"></i><span class="tbl-card__title">Registration Fee Structure</span></div>
+              <table class="data-tbl">
+                <thead><tr><th>Category</th><th>Fee (INR)</th><th>Fee (USD)</th></tr></thead>
+                <tbody>
+                  <tr><td>Delegates from Industry</td><td>Rs. 2,500 /-</td><td>—</td></tr>
+                  <tr><td>Faculty</td><td>Rs. 2,000 /-</td><td>—</td></tr>
+                  <tr><td>Research Scholars</td><td>Rs. 1,500 /-</td><td>—</td></tr>
+                  <tr><td>Students (PG / UG)</td><td>Rs. 800 /-</td><td>—</td></tr>
+                  <tr class="hl"><td>International Delegates</td><td>—</td><td>$ 100</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3 class="reg-section-h3">Registration Guidelines</h3>
+            <div style="margin-bottom:24px;">
+              <div class="check-item"><i class="fa fa-check-circle"></i>Conference is conducted in <strong>offline mode only</strong>.</div>
+              <div class="check-item"><i class="fa fa-check-circle"></i>Oral / Poster presenters must register as a delegate or student.</div>
+              <div class="check-item"><i class="fa fa-check-circle"></i>Non-presenting participants may register as an <strong>attendee</strong>.</div>
+              <div class="check-item"><i class="fa fa-check-circle"></i>Registration fee is based on <strong>citizenship</strong>, not nationality.</div>
+              <div class="check-item"><i class="fa fa-check-circle"></i>Certificate of participation provided on the final day at the registration desk.</div>
+              <div class="check-item"><i class="fa fa-check-circle"></i>Certificates issued to <strong>offline participants only</strong>.</div>
+              <div class="check-item"><i class="fa fa-check-circle"></i>Kindly mention the <strong>online transaction reference number</strong> in the registration form.</div>
+            </div>
+            <h3 class="reg-section-h3">Internet Banking / NEFT Details</h3>
+            <div class="tbl-card">
+              <table class="data-tbl">
+                <tbody>
+                  <tr><td>Account Name</td><td>REVA University</td></tr>
+                  <tr><td>Bank &amp; Branch</td><td>The Karnataka Bank Ltd, REVA University Branch</td></tr>
+                  <tr><td>Account Number</td><td><strong>6662500101008701</strong></td></tr>
+                  <tr><td>IFSC Code</td><td><strong>KARB0000666</strong></td></tr>
+                  <tr><td>SWIFT Code</td><td><strong>KARBINBBBNG</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="note-box" style="margin-top:16px;">
+              <i class="fa fa-info-circle"></i>
+              <span>After payment, <strong>mention the transaction reference number</strong> in the registration form. International participants must use USD.</span>
+            </div>
+          </div>
+          <!-- Sticky CTA card -->
+          <div>
+            <div class="reg-cta">
+              <h3>Ready to Register?</h3>
+              <p>Registration for ICRTACM-2026 opens soon. Use the links below to register, join the WhatsApp group, or pay online.</p>
+              <a href="https://forms.gle/hkyvxcdXGoGXdmFW7" target="_blank" class="btn btn--outline"><i class="fa fa-external-link-alt"></i> Registration Form</a>
+              <a href="https://chat.whatsapp.com/Ir2UHdEgx88Jf85sl3nUWX?mode=gi_t" target="_blank" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.4);width:100%;justify-content:center;margin-bottom:10px;"><i class="fab fa-whatsapp"></i> Join WhatsApp Group</a>
+              <a href="https://www.reva.edu.in/payment" target="_blank" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.3);width:100%;justify-content:center;margin-bottom:14px;"><i class="fa fa-credit-card"></i> Pay Online (REVA Portal)</a>
+              <div class="reg-cta-row"><i class="fa fa-calendar-check"></i>Registration Opens: TBD</div>
+              <div class="reg-cta-row"><i class="fa fa-clock"></i>Last Date: TBD</div>
+              <div class="reg-cta-row"><i class="fa fa-phone"></i><a href="tel:+919845871372">+91-9845871372</a></div>
+              <div class="reg-cta-row"><i class="fa fa-envelope"></i><a href="mailto:icrtacm_2026@reva.edu.in">icrtacm_2026@reva.edu.in</a></div>
+              <!-- QR Code: ./assets/img/payment_qr.png -->
+              <div class="qr-wrap">
+                <p>Scan to pay via REVA University payment portal</p>
+                <img src="./assets/img/payment_qr.png" alt="REVA University Payment QR"
+                     onerror="this.style.display='none'" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SECTION: CALL FOR ABSTRACT
+         ========================================================= -->
+    <section id="call-for-abstract" class="section">
+      <div class="container">
+        <div class="sec-hd">
+          <span class="sec-hd__label">Submissions</span>
+          <h2 class="sec-hd__title">Call for Abstract</h2>
+          <div class="sec-hd__rule"></div>
+          <p class="sec-hd__sub">We invite original research contributions from scholars across all fields of applied and computational mathematics.</p>
+        </div>
+        <div class="cfa-layout">
+          <div>
+            <div class="cfa-step"><div class="cfa-num">1</div><div><h4>Call for Research Abstract</h4><p>Research abstracts within the scope of conference thematic areas, written in English (<strong>250 words</strong>), are solicited with a declaration of originality. Abstracts submitted electronically during registration will be published in the conference compendium. The abstract should explain the topic, significance, methodology, and principal findings. All abstracts are evaluated through <strong>blind peer review</strong>.</p></div></div>
+            <div class="cfa-step"><div class="cfa-num">2</div><div><h4>Call for Oral Presentations</h4><p>Oral presentations are conducted in <strong>offline mode only</strong>. Presenters must be available at the venue.</p><div style="margin-top:10px;"><div class="check-item"><i class="fa fa-check-circle"></i>Each speaker gets <strong>15 minutes</strong> including Q&amp;A (Microsoft PowerPoint).</div><div class="check-item"><i class="fa fa-check-circle"></i>Submit the final presentation by the deadline given by the organisers.</div><div class="check-item"><i class="fa fa-check-circle"></i>Be on-site at least <strong>30 minutes</strong> before your session.</div><div class="check-item"><i class="fa fa-check-circle"></i>Carry a copy on USB. Ensure Windows OS compatibility.</div></div></div></div>
+            <div class="cfa-step"><div class="cfa-num">3</div><div><h4>Call for Poster Presentations</h4><p>Poster presentations are in <strong>offline mode only</strong>. Submission must include: (a) 8-10-word title, (b) 25-50-word abstract, (c) 1-2-page summary, (d) 2-5 keywords. Include presenter name, address, phone, email, affiliation.<br/><strong>Poster Size: 90 cm (W) x 120 cm (H)</strong></p></div></div>
+            <div class="cfa-step"><div class="cfa-num">4</div><div><h4>Awards &amp; Recognitions</h4><p>Awards recognise quality contributions among scholars who present at ICRTACM-2026.</p><div style="margin-top:10px;"><div class="check-item"><i class="fa fa-trophy" style="color:var(--reva-orange);"></i><strong>Best Paper Presentation Award</strong></div><div class="check-item"><i class="fa fa-trophy" style="color:var(--reva-orange);"></i><strong>Best Student Paper Presentation Award</strong></div><div class="check-item"><i class="fa fa-trophy" style="color:var(--reva-orange);"></i><strong>Best Poster Presentation Award</strong></div></div></div></div>
+            <!-- Publication Opportunities -->
+            <div style="background:var(--reva-white);border:1px solid var(--reva-border);border-radius:var(--radius-lg);padding:22px 24px;margin-bottom:28px;box-shadow:0 2px 10px var(--reva-shadow);">
+              <h4 style="font-family:var(--font-heading);color:var(--reva-navy);font-size:1.1rem;margin-bottom:16px;padding-left:13px;border-left:3px solid var(--reva-orange);">Publication Opportunities</h4>
+              <p style="font-family:var(--font-body);font-size:.85rem;color:var(--reva-text);margin-bottom:14px;">Selected high-quality papers presented at the conference will be considered for publication in the following <strong>Scopus-indexed journals</strong>, subject to rigorous peer review:</p>
+              <div style="background:var(--reva-peach);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;border-left:3px solid var(--reva-orange);">
+                <div style="font-family:var(--font-heading);font-size:.92rem;font-weight:700;color:var(--reva-navy);margin-bottom:4px;">1. Palestine Journal of Mathematics (PJM)</div>
+                <div style="font-family:var(--font-body);font-size:.82rem;color:var(--reva-text);">Scopus Indexed (Q3) &nbsp;&middot;&nbsp; <strong>No publication fee (Free)</strong> &nbsp;&middot;&nbsp; LaTeX format required</div>
+                <div style="font-family:var(--font-body);font-size:.78rem;color:var(--reva-muted);margin-top:5px;">Scope: Algebra, Analysis, Geometry, Topology, Number Theory, Graph Theory, Differential Equations, Fluid Dynamics, Optimization, Numerical Analysis</div>
+              </div>
+              <div style="background:var(--reva-peach);border-radius:var(--radius);padding:14px 16px;border-left:3px solid var(--reva-orange);">
+                <div style="font-family:var(--font-heading);font-size:.92rem;font-weight:700;color:var(--reva-navy);margin-bottom:4px;">2. Baghdad Science Journal (BSJ)</div>
+                <div style="font-family:var(--font-body);font-size:.82rem;color:var(--reva-text);">Scopus Indexed (Q1) &nbsp;&middot;&nbsp; Publication charges applicable (details to be communicated) &nbsp;&middot;&nbsp; MS Word format</div>
+              </div>
+            </div>
+            <div class="note-box"><i class="fa fa-user-tie"></i><div><strong>Convener:</strong> Dr. Vishu Kumar M., Professor &amp; HoD, Department of Mathematics, SAS, REVA University &nbsp;|&nbsp; <a href="tel:+919845871372">+91-9845871372</a> &nbsp;|&nbsp; <a href="mailto:icrtacm_2026@reva.edu.in">icrtacm_2026@reva.edu.in</a></div></div>
+          </div>
+          <div>
+            <div class="cfa-card"><h3><i class="fa fa-clock" style="margin-right:8px;"></i>Key Deadlines</h3><div class="dl-row"><span class="dl-row__lbl">Registration Opens</span><span class="dl-row__val">TBD</span></div><div class="dl-row"><span class="dl-row__lbl">Abstract Submission</span><span class="dl-row__val">TBD</span></div><div class="dl-row"><span class="dl-row__lbl">Acceptance Notification</span><span class="dl-row__val">TBD</span></div><div class="dl-row"><span class="dl-row__lbl">Full Paper Submission</span><span class="dl-row__val">TBD</span></div><div class="dl-row"><span class="dl-row__lbl">Last Date — Registration</span><span class="dl-row__val">TBD</span></div><div class="dl-row"><span class="dl-row__lbl">Conference</span><span class="dl-row__val">Oct 30-31, 2026</span></div></div>
+            <div class="cfa-card" style="background:var(--reva-navy);"><h3 style="border-color:rgba(255,255,255,.1);"><i class="fa fa-paper-plane" style="margin-right:8px;"></i>Submit Abstract</h3><p style="font-family:var(--font-body);font-size:.85rem;color:rgba(255,255,255,.68);margin-bottom:16px;">Submission portal opens soon. Register to receive email updates when it goes live.</p><a href="https://forms.gle/hkyvxcdXGoGXdmFW7" target="_blank" class="btn btn--primary" style="width:100%;justify-content:center;"><i class="fa fa-external-link-alt"></i> Submission Form</a></div>
+            <div class="cfa-card"><h3><i class="fa fa-users" style="margin-right:8px;"></i>Contact for Queries</h3><div style="margin-bottom:12px;"><div style="font-family:var(--font-body);font-size:.86rem;font-weight:700;color:#fff;">Dr. Vishu Kumar M. (Convener)</div><div style="font-family:var(--font-body);font-size:.75rem;color:rgba(255,255,255,.65);margin-bottom:4px;">Professor &amp; HoD, Department of Mathematics, SAS, REVA University</div><a href="tel:+919845871372" style="color:rgba(255,255,255,.85);font-size:.75rem;display:block;font-family:var(--font-body);">+91-9845871372 · vishukumarm@reva.edu.in</a></div><div><div style="font-family:var(--font-body);font-size:.86rem;font-weight:700;color:#fff;">Dr. U Vijaya Chandra Kumar (Co-Convener)</div><div style="font-family:var(--font-body);font-size:.75rem;color:rgba(255,255,255,.65);margin-bottom:4px;">Associate Professor, Department of Mathematics, SAS, REVA University</div><a href="tel:+919866309877" style="color:rgba(255,255,255,.85);font-size:.75rem;display:block;font-family:var(--font-body);">+91-9866309877 · uvijaychandra.kumar@reva.edu.in</a></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SECTION: ACCOMMODATION
+         ========================================================= -->
+    <section id="accommodation" class="section section--alt">
+      <div class="container">
+        <div class="sec-hd">
+          <span class="sec-hd__label">Stay &amp; Travel</span>
+          <h2 class="sec-hd__title">Accommodation</h2>
+          <div class="sec-hd__rule"></div>
+          <p class="sec-hd__sub">Accommodation facility at REVA Hostel is available on a chargeable basis. The campus is well-connected to Bangalore city.</p>
+        </div>
+        <div class="accomm-grid">
+          <div class="accomm-card"><div class="accomm-hd"><h3>REVA University Hostel</h3><p>On-Campus · Chargeable Basis · Subject to Availability</p></div><div class="accomm-body"><div class="accomm-row"><i class="fa fa-map-marker-alt"></i><span>REVA University Campus, Kattigenahalli, Yelahanka, Bangalore - 560 064</span></div><div class="accomm-row"><i class="fa fa-road"></i><span>On-site accommodation — zero commute to conference venue</span></div><div class="accomm-row"><i class="fa fa-user-tie"></i><span><strong>Contact:</strong> Dr. Vishu Kumar M. (Convener)</span></div><div class="accomm-row"><i class="fa fa-phone"></i><span><a href="tel:+919845871372">+91-9845871372</a></span></div><div class="accomm-row"><i class="fa fa-envelope"></i><span><a href="mailto:vishukumarm@reva.edu.in">vishukumarm@reva.edu.in</a></span></div></div></div>
+          <div class="accomm-card"><div class="accomm-hd"><h3>Nearby Hotels</h3><p>Yelahanka &amp; North Bangalore</p></div><div class="accomm-body"><div class="accomm-row"><i class="fa fa-hotel"></i><span>Several 2-4 star hotels are available in Yelahanka, Hebbal, and Nagawara — within 5-15 km of campus.</span></div><div class="accomm-row"><i class="fa fa-search"></i><span>Search on MakeMyTrip, Goibibo, or booking.com using "Hotels near REVA University Yelahanka".</span></div><div class="accomm-row"><i class="fa fa-car"></i><span>Ola / Uber cabs available 24x7 between hotels and campus.</span></div><div class="accomm-row"><i class="fa fa-info-circle" style="color:var(--reva-orange);"></i><span>Curated hotel list will be shared with registered participants closer to the conference.</span></div></div></div>
+        </div>
+        <div class="transport">
+          <h3><i class="fa fa-route" style="color:var(--reva-orange);margin-right:10px;"></i>Getting to REVA University</h3>
+          <div class="tr-grid">
+            <div class="tr-item"><div class="tr-icon"><i class="fa fa-plane"></i></div><div><h4>By Air</h4><p>Kempegowda International Airport, Bangalore is approximately 12 km from REVA University. Prepaid taxis and app-based cabs available 24x7.</p></div></div>
+            <div class="tr-item"><div class="tr-icon"><i class="fa fa-train"></i></div><div><h4>By Train</h4><p>Yelahanka Railway Station (~4 km) is the nearest station. Bangalore City / Cantonment stations (~18 km) are also accessible.</p></div></div>
+            <div class="tr-item"><div class="tr-icon"><i class="fa fa-bus"></i></div><div><h4>By Bus</h4><p>BMTC and KSRTC buses operate to Yelahanka from all major bus stands in Bangalore.</p></div></div>
+            <div class="tr-item"><div class="tr-icon"><i class="fa fa-car"></i></div><div><h4>By Cab / Road</h4><p>Ola and Uber operate extensively in Bangalore. Search "REVA University, Yelahanka" for precise navigation.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SECTION: SPONSOR BENEFITS
+         ========================================================= -->
+    <section id="sponsor-benefits" class="section">
+      <div class="container">
+        <div class="sec-hd">
+          <span class="sec-hd__label">Partnership</span>
+          <h2 class="sec-hd__title">Sponsor Benefits</h2>
+          <div class="sec-hd__rule"></div>
+          <p class="sec-hd__sub">Support ICRTACM-2026 and gain visibility among hundreds of researchers, academics, and industry professionals from across India and the world.</p>
+        </div>
+        <div class="value-row">
+          <div class="val-card"><div class="val-icon"><i class="fa fa-store"></i></div><h4>Promote Your Business</h4><p>ICRTACM-2026 will be the confluence of knowledge and interest. Promote your business through exhibition stalls and branded collateral at a high-footfall international event.</p></div>
+          <div class="val-card"><div class="val-icon"><i class="fa fa-handshake"></i></div><h4>Networking</h4><p>Interact and exchange dialogue with eminent speakers from industry and academia. Connect with researchers, faculty, and students from across India and overseas.</p></div>
+          <div class="val-card"><div class="val-icon"><i class="fa fa-rocket"></i></div><h4>Develop With Us</h4><p>The objective of ICRTACM is to create lasting interactions that lead to continued collaborations between academics, start-ups, and large companies.</p></div>
+        </div>
+        <div class="tier-grid">
+          <div class="tier-card tier--plat"><div class="tier-hd"><div class="tier-label">Platinum Sponsor</div><div class="tier-amt">Rs. 1,00,000+</div></div><div class="tier-body"><div class="tier-benefit"><i class="fa fa-check-circle"></i>Prime logo on all conference materials, banners &amp; website</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>Dedicated exhibition stall at the venue</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>5 complimentary delegate registrations</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>Featured mention in inaugural &amp; valedictory ceremony</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>Full-page advertisement in conference compendium</div></div></div>
+          <div class="tier-card tier--gold"><div class="tier-hd"><div class="tier-label">Gold Sponsor</div><div class="tier-amt">Rs. 50,000+</div></div><div class="tier-body"><div class="tier-benefit"><i class="fa fa-check-circle"></i>Logo on website, banners &amp; brochure</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>3 complimentary delegate registrations</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>Acknowledgement in conference compendium</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>Half-page advertisement in compendium</div></div></div>
+          <div class="tier-card tier--silv"><div class="tier-hd"><div class="tier-label">Silver Sponsor</div><div class="tier-amt">Rs. 25,000+</div></div><div class="tier-body"><div class="tier-benefit"><i class="fa fa-check-circle"></i>Logo on conference website</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>2 complimentary delegate registrations</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>Mention in conference compendium</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>Quarter-page advertisement in compendium</div></div></div>
+          <div class="tier-card tier--brnz"><div class="tier-hd"><div class="tier-label">Bronze Sponsor</div><div class="tier-amt">Rs. 10,000+</div></div><div class="tier-body"><div class="tier-benefit"><i class="fa fa-check-circle"></i>Logo on conference website</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>1 complimentary delegate registration</div><div class="tier-benefit"><i class="fa fa-check-circle"></i>Mention in conference compendium</div></div></div>
+        </div>
+        <div class="sp-cta">
+          <h3>Interested in Sponsoring ICRTACM-2026?</h3>
+          <p>For sponsorship enquiries, customised packages, or co-branding opportunities, contact the organising committee directly.</p>
+          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+            <a href="mailto:icrtacm_2026@reva.edu.in" class="btn btn--outline"><i class="fa fa-envelope"></i> icrtacm_2026@reva.edu.in</a>
+            <a href="tel:+919845871372" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.5);"><i class="fa fa-phone"></i> +91-9845871372</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SECTION: CONTACT
+         ========================================================= -->
+    <section id="contact" class="section section--alt">
+      <div class="container">
+        <div class="sec-hd">
+          <span class="sec-hd__label">Get in Touch</span>
+          <h2 class="sec-hd__title">Contact Us</h2>
+          <div class="sec-hd__rule"></div>
+        </div>
+        <div class="contact-grid">
+          <div>
+            <div class="ct-item"><div class="ct-icon"><i class="fa fa-map-marker-alt"></i></div><div><h4>Conference Venue</h4><p>School of Applied Sciences, REVA University<br/>Rukmini Knowledge Park, Kattigenahalli<br/>Yelahanka, Bangalore, Karnataka - 560 064, India</p></div></div>
+            <div class="ct-item"><div class="ct-icon"><i class="fa fa-envelope"></i></div><div><h4>Email</h4><p><a href="mailto:icrtacm_2026@reva.edu.in">icrtacm_2026@reva.edu.in</a></p></div></div>
+            <div class="ct-item"><div class="ct-icon"><i class="fa fa-phone-alt"></i></div><div><h4>Phone</h4><p><a href="tel:+919845871372">+91 9845871372</a></p></div></div>
+            <div class="ct-item"><div class="ct-icon"><i class="fa fa-globe"></i></div><div><h4>University Website</h4><p><a href="https://www.reva.edu.in" target="_blank">www.reva.edu.in</a></p></div></div>
+            <div class="org-card">
+              <h4>Reach the Organising Team</h4>
+              <div class="org-row"><div class="org-name">Dr. Vishu Kumar M. (Convenor)</div><div class="org-title">Professor, School of Applied Sciences (Mathematics), REVA University</div><div class="org-links"><a href="tel:+919845871372"><i class="fa fa-phone"></i> +91-9845871372</a><a href="mailto:vishukumarm@reva.edu.in"><i class="fa fa-envelope"></i> vishukumarm@reva.edu.in</a></div></div>
+             
+              <div class="org-row"><div class="org-name">Dr. U Vijaya Chandra Kumar (Co-Convener)</div><div class="org-title">Associate Professor, Department of Mathematics, SAS, REVA University</div><div class="org-links"><a href="tel:+919866309877"><i class="fa fa-phone"></i> +91-9866309877</a><a href="mailto:uvijaychandra.kumar@reva.edu.in"><i class="fa fa-envelope"></i> uvijaychandra.kumar@reva.edu.in</a></div></div>
+            </div>
+          </div>
+          <div>
+            <div class="map-wrap">
+              <!-- Google Maps embed — REVA University, Rukmini Knowledge Park, Kattigenahalli, Yelahanka, Bangalore 560064 -->
+              <iframe
+                src="https://maps.google.com/maps?q=REVA+University,+Rukmini+Knowledge+Park,+Kattigenahalli,+Yelahanka,+Bangalore,+Karnataka+560064&output=embed&z=16"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="REVA University, Rukmini Knowledge Park, Kattigenahalli, Yelahanka, Bangalore - 560 064">
+              </iframe>
+            </div>
+            <p style="font-family:var(--font-body);font-size:.74rem;color:var(--reva-muted);margin-top:8px;text-align:center;">
+              REVA University — Rukmini Knowledge Park, Kattigenahalli, Yelahanka, Bangalore - 560 064
+            </p>
+            <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px;">
+              <a href="https://chat.whatsapp.com/Ir2UHdEgx88Jf85sl3nUWX?mode=gi_t" target="_blank" class="btn btn--dark" style="justify-content:center;"><i class="fab fa-whatsapp"></i> Join WhatsApp Group for Updates</a>
+              <a href="https://forms.gle/hkyvxcdXGoGXdmFW7" target="_blank" class="btn btn--primary" style="justify-content:center;"><i class="fa fa-user-plus"></i> Register for ICRTACM-2026</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER — dark charcoal, REVA research portal style
+       Logo: ./assets/img/logos/REVA_Logo_2.png
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">
+            <div class="footer__logo">
+              <!-- REVA icon — placed directly, no circular frame -->
+              <img src="./assets/img/logos/REVA_icon.png" alt="REVA University"
+                   onerror="this.style.display='none'" />
+            </div>
+            <div>
+              <div class="footer__bname">ICRTACM-2026</div>
+              <div class="footer__bsub">School of Applied Sciences, REVA University</div>
+            </div>
+          </div>
+          <p class="footer__desc">7th International Conference on Recent Trends in Applied and Computational Mathematics. Bringing global researchers together at REVA University, Bangalore, on October 30-31, 2026.</p>
+        </div>
+        <div>
+          <div class="footer__col-h">Quick Links</div>
+          <div class="footer__links">
+            <span class="footer__link" onclick="showSection('home')">Home</span>
+            <span class="footer__link" onclick="showSection('about')">About the Conference</span>
+            <span class="footer__link" onclick="showSection('speakers')">Speakers</span>
+            <span class="footer__link" onclick="showSection('agenda')">Agenda</span>
+            <span class="footer__link" onclick="showSection('committees')">Committees</span>
+            <span class="footer__link" onclick="showSection('registration')">Registration</span>
+            <span class="footer__link" onclick="showSection('call-for-abstract')">Call for Abstract</span>
+            <span class="footer__link" onclick="showSection('contact')">Contact</span>
+          </div>
+        </div>
+        <div>
+          <div class="footer__col-h">Contact</div>
+          <div class="footer__cr"><i class="fa fa-map-marker-alt"></i><span>Rukmini Knowledge Park, Kattigenahalli, Yelahanka, Bangalore - 560 064</span></div>
+          <div class="footer__cr"><i class="fa fa-envelope"></i><a href="mailto:icrtacm_2026@reva.edu.in">icrtacm_2026@reva.edu.in</a></div>
+          <div class="footer__cr"><i class="fa fa-phone"></i><a href="tel:+919845871372">+91-9845871372</a></div>
+          <div class="footer__cr"><i class="fa fa-globe"></i><a href="https://www.reva.edu.in" target="_blank">www.reva.edu.in</a></div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">&copy; 2026 REVA University. All Rights Reserved. ICRTACM-2026 — 7th Edition.</span>
+        <span class="footer__badge">School of Applied Sciences &nbsp;·&nbsp; Department of Mathematics &nbsp;·&nbsp; Bangalore, India</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+
+  <!-- ============================================================
+       JAVASCRIPT — all interactions, no frameworks
+       ============================================================ -->
+  <script>
+
+    /* showSection — hide all, show target, update nav active states */
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+      document.querySelectorAll('.nav-link').forEach(function(l){ l.classList.remove('active'); });
+      document.querySelectorAll('.mobile-link').forEach(function(l){ l.classList.remove('active'); });
+      var t = document.getElementById(id);
+      if(t) t.classList.add('active');
+      var nl = document.getElementById('nav-'+id);
+      if(nl) nl.classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+      var dd = document.getElementById('moreDD');
+      if(dd) dd.classList.remove('open');
+    }
+
+    /* Mobile hamburger menu */
+    function toggleMobile() {
+      document.getElementById('burgerBtn').classList.toggle('open');
+      document.getElementById('mobileNav').classList.toggle('open');
+    }
+    function closeMobile() {
+      document.getElementById('burgerBtn').classList.remove('open');
+      document.getElementById('mobileNav').classList.remove('open');
+    }
+
+    /* Desktop "More" dropdown */
+    function toggleDD() {
+      document.getElementById('moreDD').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e){
+      var dd = document.getElementById('moreDD');
+      if(dd && !dd.contains(e.target)) dd.classList.remove('open');
+    });
+
+    /* Countdown timer — target: Oct 30, 2026 09:00 IST (UTC+5:30) */
+    function startCountdown() {
+      var target = new Date('2026-10-30T09:00:00+05:30');
+      function tick() {
+        var diff = target - new Date();
+        if(diff <= 0) {
+          ['ctDays','ctHours','ctMins','ctSecs'].forEach(function(x){ document.getElementById(x).textContent='00'; });
+          return;
+        }
+        document.getElementById('ctDays').textContent  = String(Math.floor(diff/86400000)).padStart(3,'0');
+        document.getElementById('ctHours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+        document.getElementById('ctMins').textContent  = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+        document.getElementById('ctSecs').textContent  = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+      }
+      tick(); setInterval(tick,1000);
+    }
+
+    /* Agenda day tabs — 'd1' or 'd2' */
+    function switchDay(day) {
+      document.querySelectorAll('.ag-tab').forEach(function(t){ t.classList.remove('active'); });
+      document.querySelectorAll('.ag-day').forEach(function(p){ p.classList.remove('active'); });
+      document.getElementById('tab-'+day).classList.add('active');
+      document.getElementById('ag-'+day).classList.add('active');
+    }
+
+    /* Committee panel tabs — 'org' | 'loc' | 'intl' */
+    function switchComm(name) {
+      document.querySelectorAll('.comm-tab').forEach(function(t){ t.classList.remove('active'); });
+      document.querySelectorAll('.comm-panel').forEach(function(p){ p.classList.remove('active'); });
+      document.getElementById('ctab-'+name).classList.add('active');
+      document.getElementById('cpanel-'+name).classList.add('active');
+    }
+
+    /* Scroll-to-top FAB */
+    function scrollToTop() { window.scrollTo({top:0,behavior:'smooth'}); }
+    window.addEventListener('scroll', function(){
+      document.getElementById('scrollTopBtn').classList.toggle('visible', window.scrollY > 280);
+    }, { passive: true });
+
+    /* Init on DOM ready */
+    document.addEventListener('DOMContentLoaded', function(){
+      showSection('home');
+      startCountdown();
+
+      /* Navbar frosted-glass scroll effect —
+         adds .scrolled class after 60px scroll;
+         CSS transition handles background + backdrop-filter smoothly */
+      var navbar = document.querySelector('.navbar');
+      function handleNavScroll() {
+        navbar.classList.toggle('scrolled', window.scrollY > 60);
+      }
+      window.addEventListener('scroll', handleNavScroll, { passive: true });
+    });
+
+  </script>
+</body>
+</html>
